@@ -1,9 +1,10 @@
 
 /* ==================================================
-   KRATS AEROSPACE
-   MANUAL DE IDENTIDAD CORPORATIVA
+   KITES AIR
+   MANUAL DE MARCA
    stylemanual.css
    ================================================== */
+
 
 /* ---------- 01. VARIABLES Y CONFIGURACIÓN ---------- */
 
@@ -16,12 +17,11 @@
     --red-dark: #a9272e;
 
     --white: #ffffff;
-    --off-white: #f5f5f2;
-    --paper: #ecece7;
+    --off-white: #f7f8fa;
+    --paper: #edf0f4;
 
-    --grey: #a7afb8;
-    --grey-dark: #646d77;
     --text: #202a35;
+    --text-light: #465365;
 
     --border: rgba(16, 28, 44, 0.15);
     --border-light: rgba(255, 255, 255, 0.18);
@@ -42,16 +42,16 @@
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 90px;
+    scroll-padding-top: 100px;
 }
 
 body {
+    overflow-x: hidden;
     background: var(--off-white);
     color: var(--text);
     font-family: var(--font);
     font-size: 14px;
     line-height: 1.8;
-    overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -70,6 +70,17 @@ button {
     font: inherit;
 }
 
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 3px solid var(--red);
+    outline-offset: 5px;
+}
+
 img {
     display: block;
     max-width: 100%;
@@ -86,7 +97,7 @@ img {
 .eyebrow {
     font-size: 10px;
     font-weight: 800;
-    letter-spacing: 2.5px;
+    letter-spacing: 2px;
     line-height: 1.6;
     text-transform: uppercase;
 }
@@ -102,7 +113,7 @@ img {
 .manual-section {
     position: relative;
     padding: var(--section-padding) max(7%, calc((100% - var(--container)) / 2));
-    scroll-margin-top: 75px;
+    scroll-margin-top: 90px;
 }
 
 .section-heading {
@@ -113,13 +124,13 @@ img {
 }
 
 .section-heading .section-index {
-    padding-top: 12px;
     min-width: 28px;
+    padding-top: 12px;
 }
 
 .section-heading .eyebrow {
-    color: var(--red);
     margin-bottom: 10px;
+    color: var(--red);
 }
 
 .section-heading h2 {
@@ -133,9 +144,9 @@ img {
 .section-intro {
     max-width: 760px;
     margin-bottom: 55px;
-    color: var(--grey-dark);
-    font-size: 16px;
-    line-height: 2;
+    color: var(--text-light);
+    font-size: 15px;
+    line-height: 1.9;
 }
 
 .section-bottom-label {
@@ -145,7 +156,7 @@ img {
     padding-top: 22px;
     margin-top: 65px;
     border-top: 1px solid var(--border);
-    color: var(--grey-dark);
+    color: var(--text-light);
     font-size: 9px;
     font-weight: 700;
     letter-spacing: 1.5px;
@@ -158,9 +169,10 @@ img {
     position: sticky;
     top: 0;
     z-index: 1000;
-    background: rgba(16, 28, 44, 0.97);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid var(--border-light);
+    background: rgba(16, 28, 44, 0.98);
     backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
 }
 
 .manual-nav {
@@ -176,9 +188,9 @@ img {
 .manual-logo {
     display: inline-flex;
     align-items: center;
+    flex-shrink: 0;
     gap: 12px;
     color: var(--white);
-    flex-shrink: 0;
 }
 
 .logo-symbol {
@@ -207,7 +219,7 @@ img {
 
 .logo-text small {
     margin-top: 5px;
-    color: var(--grey);
+    color: #ffffff;
     font-size: 8px;
     font-weight: 600;
     letter-spacing: 3px;
@@ -222,7 +234,7 @@ img {
 .nav-links a {
     position: relative;
     padding: 8px 0;
-    color: #c3cbd3;
+    color: #e0e5ec;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.7px;
@@ -242,12 +254,14 @@ img {
 }
 
 .nav-links a:hover,
-.nav-links a.active {
+.nav-links a.active,
+.nav-links a[aria-current="page"] {
     color: var(--white);
 }
 
 .nav-links a:hover::after,
-.nav-links a.active::after {
+.nav-links a.active::after,
+.nav-links a[aria-current="page"]::after {
     width: 100%;
 }
 
@@ -267,7 +281,9 @@ img {
     height: 2px;
     margin: 5px 0;
     background: var(--white);
-    transition: var(--transition);
+    transition:
+        transform var(--transition),
+        opacity var(--transition);
 }
 
 .menu-toggle.is-open span:first-child {
@@ -288,15 +304,19 @@ img {
 .manual-cover {
     position: relative;
     isolation: isolate;
-    min-height: min(790px, calc(100vh - 82px));
+    min-height: min(790px, calc(100svh - 82px));
     padding: 38px max(7%, calc((100% - var(--container)) / 2)) 30px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     overflow: hidden;
     color: var(--white);
-    background:
-        linear-gradient(115deg, rgba(16, 28, 44, 0.99) 0%, rgba(16, 28, 44, 0.96) 48%, rgba(25, 43, 64, 0.88) 100%);
+    background: linear-gradient(
+        115deg,
+        #101c2c 0%,
+        #101c2c 48%,
+        #192b40 100%
+    );
 }
 
 .manual-cover::before {
@@ -306,10 +326,11 @@ img {
     inset: 0;
     opacity: 0.12;
     background-image:
-        linear-gradient(rgba(255,255,255,0.14) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.14) 1px, transparent 1px);
+        linear-gradient(rgba(255, 255, 255, 0.14) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.14) 1px, transparent 1px);
     background-size: 60px 60px;
     mask-image: linear-gradient(90deg, transparent, black);
+    -webkit-mask-image: linear-gradient(90deg, transparent, black);
 }
 
 .manual-cover::after {
@@ -339,7 +360,7 @@ img {
 
 .cover-edition,
 .cover-footer {
-    color: #aeb9c6;
+    color: #e0e5ec;
     font-size: 9px;
     font-weight: 700;
     letter-spacing: 1.5px;
@@ -356,7 +377,7 @@ img {
 .cover-content .section-number {
     display: block;
     margin-bottom: 22px;
-    color: #f16a62;
+    color: #ff8585;
 }
 
 .cover-content h1 {
@@ -372,11 +393,12 @@ img {
 }
 
 .cover-description {
-    max-width: 390px;
+    max-width: 430px;
     margin-top: 30px;
-    color: #c5cdd6;
-    font-size: 14px;
-    line-height: 2;
+    color: #e0e5ec;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.8;
 }
 
 .cover-link {
@@ -394,7 +416,7 @@ img {
 }
 
 .cover-link span {
-    color: #f16a62;
+    color: #ff8585;
     font-size: 18px;
 }
 
@@ -409,7 +431,7 @@ img {
     width: min(40vw, 480px);
     aspect-ratio: 1;
     transform: translateY(-46%);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
     border-radius: 50%;
 }
 
@@ -417,7 +439,7 @@ img {
     position: absolute;
     top: 50%;
     left: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.16);
     border-radius: 50%;
     transform: translate(-50%, -50%);
 }
@@ -435,7 +457,7 @@ img {
 .ring-three {
     width: 44%;
     height: 44%;
-    border-color: rgba(201, 54, 54, 0.6);
+    border-color: rgba(201, 54, 54, 0.8);
 }
 
 .cover-graphic::before,
@@ -446,7 +468,7 @@ img {
     left: 0;
     width: 100%;
     height: 1px;
-    background: rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.16);
 }
 
 .cover-graphic::after {
@@ -466,7 +488,7 @@ img {
 .graphic-label,
 .graphic-coordinate {
     position: absolute;
-    color: #aeb9c6;
+    color: #e0e5ec;
     font-size: 9px;
     font-weight: 700;
     letter-spacing: 2px;
@@ -495,8 +517,8 @@ img {
 .introduction-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 90px;
     align-items: start;
+    gap: 90px;
 }
 
 .large-statement {
@@ -513,14 +535,14 @@ img {
 
 .intro-copy > p {
     margin-bottom: 22px;
-    color: #59636d;
+    color: var(--text-light);
     font-size: 13px;
-    line-height: 2.1;
+    line-height: 2;
 }
 
 .intro-values {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 14px;
     margin-top: 42px;
     padding-top: 25px;
@@ -543,7 +565,7 @@ img {
 }
 
 
-/* ---------- 06. BRANDING ---------- */
+/* ---------- 06. IDENTIDAD VISUAL ---------- */
 
 .branding-section {
     background: var(--white);
@@ -551,7 +573,7 @@ img {
 
 .brand-identity {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     margin-bottom: 30px;
 }
 
@@ -565,7 +587,7 @@ img {
 }
 
 .brand-identity-main {
-    background: #f0f0ec;
+    background: var(--paper);
 }
 
 .brand-identity-dark {
@@ -574,12 +596,12 @@ img {
 }
 
 .brand-identity .eyebrow {
-    color: var(--grey-dark);
+    color: var(--text-light);
     font-size: 9px;
 }
 
 .brand-identity-dark .eyebrow {
-    color: var(--grey);
+    color: var(--white);
 }
 
 .brand-wordmark {
@@ -590,10 +612,10 @@ img {
 }
 
 .brand-monogram {
-    display: grid;
-    place-items: center;
     width: 64px;
     height: 64px;
+    display: grid;
+    place-items: center;
     border: 2px solid var(--red);
     font-size: 39px;
     font-weight: 900;
@@ -625,17 +647,17 @@ img {
 
 .identity-caption {
     margin-top: 24px;
-    color: var(--grey-dark);
+    color: var(--text-light);
     font-size: 10px;
 }
 
 .brand-identity-dark .identity-caption {
-    color: #aeb9c6;
+    color: #e0e5ec;
 }
 
 .brand-guidelines {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     border: 1px solid var(--border);
 }
 
@@ -662,7 +684,7 @@ img {
 }
 
 .guideline-card p {
-    color: var(--grey-dark);
+    color: var(--text-light);
     font-size: 11px;
     line-height: 2;
 }
@@ -692,14 +714,14 @@ img {
 }
 
 .subsection-heading > p {
-    color: var(--grey-dark);
+    color: var(--text-light);
     font-size: 12px;
     line-height: 2;
 }
 
 .color-palette {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 18px;
 }
 
@@ -707,11 +729,14 @@ img {
     min-width: 0;
     border: 1px solid var(--border);
     background: var(--white);
-    transition: transform var(--transition);
+    transition:
+        transform var(--transition),
+        box-shadow var(--transition);
 }
 
 .color-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(16, 28, 44, 0.08);
 }
 
 .color-swatch {
@@ -729,10 +754,6 @@ img {
 .color-white {
     border-bottom: 1px solid var(--border);
     background: #ffffff;
-}
-
-.color-grey {
-    background: #a7afb8;
 }
 
 .color-information {
@@ -756,8 +777,9 @@ img {
 
 .color-information p {
     margin-top: 10px;
-    color: var(--grey-dark);
+    color: var(--text-light);
     font-size: 10px;
+    line-height: 1.7;
 }
 
 
@@ -766,7 +788,7 @@ img {
 .type-specimen {
     display: grid;
     grid-template-columns: 1.1fr 0.9fr;
-    background: #f0f0ec;
+    background: var(--paper);
 }
 
 .type-main {
@@ -777,7 +799,7 @@ img {
 .type-label {
     display: block;
     margin-bottom: 24px;
-    color: var(--grey-dark);
+    color: var(--text-light);
     font-size: 9px;
     font-weight: 800;
     letter-spacing: 1.2px;
@@ -815,23 +837,23 @@ img {
 
 .type-sample p {
     margin-top: 10px;
-    color: var(--grey-dark);
+    color: var(--text-light);
     font-size: 11px;
     line-height: 2;
 }
 
 
-/* ---------- 09. NAMING ---------- */
+/* ---------- 09. NOMBRE Y ESLOGAN ---------- */
 
 .naming-section {
-    background: #f0f0ec;
+    background: var(--paper);
 }
 
 .naming-layout {
     display: grid;
     grid-template-columns: 0.85fr 1.15fr;
-    gap: 70px;
     align-items: stretch;
+    gap: 70px;
 }
 
 .naming-highlight {
@@ -852,16 +874,17 @@ img {
     position: absolute;
     right: -25px;
     bottom: -110px;
-    color: rgba(255, 255, 255, 0.035);
+    color: rgba(255, 255, 255, 0.04);
     font-size: 350px;
     font-weight: 900;
     line-height: 1;
+    pointer-events: none;
 }
 
 .naming-highlight .eyebrow {
     position: relative;
     z-index: 1;
-    color: #aeb9c6;
+    color: #e0e5ec;
 }
 
 .naming-word {
@@ -875,14 +898,14 @@ img {
 }
 
 .naming-word span {
-    color: var(--red);
+    color: #ff7777;
 }
 
 .naming-subtitle {
     position: relative;
     z-index: 1;
     margin-top: 12px;
-    color: #bdc6d0;
+    color: #e0e5ec;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 5px;
@@ -900,9 +923,11 @@ img {
 .naming-tagline {
     position: relative;
     z-index: 1;
+    max-width: 260px;
     margin-top: 20px;
-    color: #c1cad4;
-    font-size: 11px;
+    color: #e0e5ec;
+    font-size: 12px;
+    line-height: 1.8;
 }
 
 .naming-explanation h3 {
@@ -916,7 +941,7 @@ img {
 
 .naming-explanation > p {
     margin-bottom: 20px;
-    color: var(--grey-dark);
+    color: var(--text-light);
     font-size: 12px;
     line-height: 2.1;
 }
@@ -948,7 +973,7 @@ img {
 .naming-principles p {
     display: flex;
     flex-direction: column;
-    color: var(--grey-dark);
+    color: var(--text-light);
     font-size: 11px;
 }
 
@@ -968,13 +993,13 @@ img {
 .voice-introduction {
     display: grid;
     grid-template-columns: 1fr 0.8fr;
-    gap: 75px;
     align-items: start;
+    gap: 75px;
     margin-bottom: 60px;
 }
 
 .voice-introduction > p:last-child {
-    color: var(--grey-dark);
+    color: var(--text-light);
     font-size: 12px;
     line-height: 2.1;
 }
@@ -1000,12 +1025,12 @@ img {
 }
 
 .voice-symbol {
-    display: inline-grid;
-    place-items: center;
     width: 39px;
     height: 39px;
-    border: 1px solid rgba(201, 54, 54, 0.45);
-    color: var(--red);
+    display: inline-grid;
+    place-items: center;
+    border: 1px solid rgba(201, 54, 54, 0.55);
+    color: var(--red-dark);
     font-size: 10px;
     font-weight: 800;
 }
@@ -1020,7 +1045,7 @@ img {
 .voice-card > p {
     min-height: 90px;
     margin-top: 12px;
-    color: var(--grey-dark);
+    color: var(--text-light);
     font-size: 11px;
     line-height: 2;
 }
@@ -1032,7 +1057,7 @@ img {
 }
 
 .voice-example span {
-    color: var(--red);
+    color: var(--red-dark);
     font-size: 8px;
     font-weight: 800;
     letter-spacing: 1px;
@@ -1064,7 +1089,7 @@ img {
 
 .voice-summary .eyebrow {
     flex-shrink: 0;
-    color: #ef7770;
+    color: #ff8585;
 }
 
 .voice-summary p {
@@ -1105,10 +1130,11 @@ img {
 }
 
 .manual-closing .eyebrow {
-    color: #ef7770;
+    color: #ff8585;
 }
 
 .manual-closing h2 {
+    max-width: 850px;
     margin-top: 20px;
     font-size: clamp(48px, 7vw, 82px);
     font-weight: 900;
@@ -1119,7 +1145,7 @@ img {
 .manual-closing > p {
     max-width: 430px;
     margin-top: 25px;
-    color: #bac4cf;
+    color: #e0e5ec;
     font-size: 12px;
     line-height: 2;
 }
@@ -1143,15 +1169,16 @@ img {
 }
 
 .closing-link span {
-    color: #ef7770;
+    color: #ff8585;
     font-size: 16px;
 }
 
 .closing-mark {
     position: absolute;
+    z-index: -1;
     top: 50%;
     right: 12%;
-    color: rgba(255, 255, 255, 0.035);
+    color: rgba(255, 255, 255, 0.04);
     font-size: clamp(250px, 35vw, 450px);
     font-weight: 900;
     line-height: 1;
@@ -1169,7 +1196,7 @@ img {
     align-items: center;
     justify-content: space-between;
     gap: 25px;
-    color: #bdc6d0;
+    color: #e0e5ec;
     background: #0b1420;
 }
 
@@ -1185,7 +1212,7 @@ img {
 }
 
 .back-to-top {
-    color: #bdc6d0;
+    color: #e0e5ec;
     font-size: 9px;
     font-weight: 800;
     letter-spacing: 1px;
@@ -1217,17 +1244,6 @@ img {
 
 .cover-graphic {
     animation: coverFadeUp 1s ease both;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        scroll-behavior: auto !important;
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
 }
 
 
@@ -1267,10 +1283,6 @@ img {
 
     .naming-layout {
         gap: 40px;
-    }
-
-    .color-palette {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .color-swatch {
@@ -1314,9 +1326,9 @@ img {
     }
 
     .menu-toggle {
-        display: block;
         position: relative;
         z-index: 1002;
+        display: block;
     }
 
     .nav-links {
@@ -1329,8 +1341,8 @@ img {
         align-items: stretch;
         gap: 0;
         padding: 8px 22px 18px;
-        background: var(--navy);
         border-top: 1px solid var(--border-light);
+        background: var(--navy);
         visibility: hidden;
         opacity: 0;
         transform: translateY(-8px);
@@ -1385,7 +1397,7 @@ img {
 
     .cover-description {
         max-width: 300px;
-        font-size: 12px;
+        font-size: 14px;
     }
 
     .cover-graphic {
@@ -1625,5 +1637,22 @@ img {
 
     .manual-closing h2 {
         font-size: 48px;
+    }
+}
+
+
+/* ---------- 17. ACCESIBILIDAD ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
     }
 }
