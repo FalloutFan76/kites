@@ -1,176 +1,258 @@
 /* =========================================================
-   KRATS AEROSPACE
+   KITES AIR
    JavaScript principal de la web
    Archivo: script.js
+   Versión corregida y compatible con index.html y style.css
 ========================================================= */
 
-document.addEventListener("DOMContentLoaded", () => {
+(() => {
+    "use strict";
 
-    /* =====================================================
-       01. MENÚ MÓVIL
-    ===================================================== */
+    document.addEventListener("DOMContentLoaded", () => {
 
-    const menuToggle = document.querySelector(".menu-toggle");
-    const navLinks = document.querySelector(".nav-links");
-    const navItems = document.querySelectorAll(".nav-links a");
+        /* =====================================================
+           01. CONFIGURACIÓN GENERAL
+        ===================================================== */
 
-    if (menuToggle && navLinks) {
+        const prefersReducedMotion = window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
 
-        const openMenu = () => {
-            navLinks.classList.add("active");
-            menuToggle.setAttribute("aria-expanded", "true");
-            menuToggle.setAttribute(
-                "aria-label",
-                "Cerrar menú de navegación"
-            );
-            document.body.classList.add("menu-open");
-        };
+        const mobileBreakpoint = 850;
 
-        const closeMenu = () => {
-            navLinks.classList.remove("active");
+        /*
+         * Indica al CSS que JavaScript está disponible.
+         * Se añade después de cargar el documento para evitar
+         * dejar contenido invisible si el script no funciona.
+         */
+
+        document.documentElement.classList.add("js-enabled");
+
+
+        /* =====================================================
+           02. MENÚ MÓVIL
+        ===================================================== */
+
+        const menuToggle = document.querySelector(".menu-toggle");
+        const navLinks = document.querySelector(".nav-links");
+
+        if (menuToggle && navLinks) {
+
+            const navItems = navLinks.querySelectorAll("a");
+
+            /*
+             * Inicializa el estado accesible del botón.
+             */
+
             menuToggle.setAttribute("aria-expanded", "false");
             menuToggle.setAttribute(
                 "aria-label",
                 "Abrir menú de navegación"
             );
-            document.body.classList.remove("menu-open");
-        };
 
-        const toggleMenu = () => {
-            const isOpen =
-                menuToggle.getAttribute("aria-expanded") === "true";
+            const isMenuOpen = () => {
+                return menuToggle.getAttribute("aria-expanded") === "true";
+            };
 
-            if (isOpen) {
-                closeMenu();
-            } else {
-                openMenu();
-            }
-        };
+            const openMenu = () => {
+                navLinks.classList.add("active");
+                menuToggle.setAttribute("aria-expanded", "true");
+                menuToggle.setAttribute(
+                    "aria-label",
+                    "Cerrar menú de navegación"
+                );
 
-        menuToggle.addEventListener("click", toggleMenu);
+                document.body.classList.add("menu-open");
+            };
 
-        // Cierra el menú cuando se selecciona una sección.
-        navItems.forEach((link) => {
-            link.addEventListener("click", closeMenu);
-        });
+            const closeMenu = ({ restoreFocus = false } = {}) => {
+                navLinks.classList.remove("active");
+                menuToggle.setAttribute("aria-expanded", "false");
+                menuToggle.setAttribute(
+                    "aria-label",
+                    "Abrir menú de navegación"
+                );
 
-        // Cierra el menú con Escape.
-        document.addEventListener("keydown", (event) => {
-            if (
-                event.key === "Escape" &&
-                menuToggle.getAttribute("aria-expanded") === "true"
-            ) {
-                closeMenu();
-                menuToggle.focus();
-            }
-        });
+                document.body.classList.remove("menu-open");
 
-        // Cierra el menú si se vuelve a una pantalla grande.
-        window.addEventListener("resize", () => {
-            if (window.innerWidth > 850) {
-                closeMenu();
-            }
-        });
+                if (restoreFocus) {
+                    menuToggle.focus();
+                }
+            };
 
-        // Cierra el menú si se pulsa fuera de él.
-        document.addEventListener("click", (event) => {
-            const isOpen =
-                menuToggle.getAttribute("aria-expanded") === "true";
+            menuToggle.addEventListener("click", () => {
+                if (isMenuOpen()) {
+                    closeMenu();
+                } else {
+                    openMenu();
+                }
+            });
 
-            if (
-                isOpen &&
-                !navLinks.contains(event.target) &&
-                !menuToggle.contains(event.target)
-            ) {
-                closeMenu();
-            }
-        });
-    }
+            /*
+             * Cierra el menú al seleccionar un enlace.
+             * No interfiere con enlaces a otras páginas.
+             */
 
-
-    /* =====================================================
-       02. AÑO AUTOMÁTICO DEL FOOTER
-    ===================================================== */
-
-    const currentYear = document.querySelector("#current-year");
-
-    if (currentYear) {
-        currentYear.textContent = new Date().getFullYear();
-    }
-
-
-    /* =====================================================
-       03. ANIMACIONES AL HACER SCROLL
-    ===================================================== */
-
-    const animatedElements = document.querySelectorAll(
-        ".intro-heading, " +
-        ".intro-copy, " +
-        ".aircraft-card, " +
-        ".solution-item, " +
-        ".principle-card, " +
-        ".contact-heading, " +
-        ".contact-panel"
-    );
-
-    const prefersReducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)"
-    ).matches;
-
-    if ("IntersectionObserver" in window && !prefersReducedMotion) {
-
-        // Evita mostrar elementos antes de que entren en pantalla.
-        const observer = new IntersectionObserver(
-            (entries, currentObserver) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add("is-visible");
-                        currentObserver.unobserve(entry.target);
-                    }
+            navItems.forEach((link) => {
+                link.addEventListener("click", () => {
+                    closeMenu();
                 });
-            },
-            {
-                threshold: 0.12,
-                rootMargin: "0px 0px -35px 0px"
-            }
+            });
+
+            /*
+             * Cierra el menú con Escape y devuelve el foco
+             * al botón que lo abrió.
+             */
+
+            document.addEventListener("keydown", (event) => {
+                if (event.key === "Escape" && isMenuOpen()) {
+                    closeMenu({ restoreFocus: true });
+                }
+            });
+
+            /*
+             * Cierra el menú al pulsar fuera de la navegación.
+             */
+
+            document.addEventListener("click", (event) => {
+                if (!isMenuOpen()) {
+                    return;
+                }
+
+                const clickedInsideMenu = navLinks.contains(event.target);
+                const clickedToggle = menuToggle.contains(event.target);
+
+                if (!clickedInsideMenu && !clickedToggle) {
+                    closeMenu();
+                }
+            });
+
+            /*
+             * Cierra el menú al pasar a una pantalla grande.
+             */
+
+            let resizeTimer;
+
+            window.addEventListener("resize", () => {
+                window.clearTimeout(resizeTimer);
+
+                resizeTimer = window.setTimeout(() => {
+                    if (window.innerWidth > mobileBreakpoint) {
+                        closeMenu();
+                    }
+                }, 100);
+            });
+
+            /*
+             * Cierra el menú si cambia la orientación del dispositivo
+             * y la nueva anchura ya no corresponde al menú móvil.
+             */
+
+            window.addEventListener("orientationchange", () => {
+                if (window.innerWidth > mobileBreakpoint) {
+                    closeMenu();
+                }
+            });
+        }
+
+
+        /* =====================================================
+           03. AÑO AUTOMÁTICO DEL PIE DE PÁGINA
+        ===================================================== */
+
+        const currentYear = document.querySelector("#current-year");
+
+        if (currentYear) {
+            currentYear.textContent = String(new Date().getFullYear());
+        }
+
+
+        /* =====================================================
+           04. ANIMACIONES AL DESPLAZARSE
+        ===================================================== */
+
+        const animatedElements = document.querySelectorAll(
+            [
+                ".intro-heading",
+                ".intro-copy",
+                ".aircraft-card",
+                ".solution-item",
+                ".principle-card",
+                ".contact-heading",
+                ".contact-panel"
+            ].join(", ")
         );
 
-        animatedElements.forEach((element) => {
-            element.classList.add("reveal-on-scroll");
-            observer.observe(element);
-        });
+        /*
+         * Si el usuario prefiere movimiento reducido, mostramos
+         * todo el contenido sin animaciones de entrada.
+         */
 
-    } else {
-        animatedElements.forEach((element) => {
-            element.classList.add("is-visible");
-        });
-    }
+        if (prefersReducedMotion || !("IntersectionObserver" in window)) {
+
+            animatedElements.forEach((element) => {
+                element.classList.add("is-visible");
+            });
+
+        } else {
+
+            const revealObserver = new IntersectionObserver(
+                (entries, observer) => {
+                    entries.forEach((entry) => {
+                        if (!entry.isIntersecting) {
+                            return;
+                        }
+
+                        entry.target.classList.add("is-visible");
+                        observer.unobserve(entry.target);
+                    });
+                },
+                {
+                    threshold: 0.12,
+                    rootMargin: "0px 0px -35px 0px"
+                }
+            );
+
+            animatedElements.forEach((element) => {
+                element.classList.add("reveal-on-scroll");
+                revealObserver.observe(element);
+            });
+        }
 
 
-    /* =====================================================
-       04. NAVEGACIÓN Y SECCIÓN ACTIVA
-    ===================================================== */
+        /* =====================================================
+           05. NAVEGACIÓN Y SECCIÓN ACTIVA
+        ===================================================== */
 
-    const sections = document.querySelectorAll(
-        "main section[id]"
-    );
+        const sections = document.querySelectorAll("main section[id]");
 
-    const sectionLinks = document.querySelectorAll(
-        '.nav-links a[href^="#"]'
-    );
+        const sectionLinks = document.querySelectorAll(
+            '.nav-links a[href^="#"]'
+        );
 
-    if ("IntersectionObserver" in window && sections.length) {
+        /*
+         * Marca en la navegación la sección que está en pantalla.
+         */
 
-        const sectionObserver = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (!entry.isIntersecting) return;
+        if ("IntersectionObserver" in window && sections.length > 0) {
 
-                    const currentId = entry.target.id;
+            const sectionObserver = new IntersectionObserver(
+                (entries) => {
+                    const visibleEntries = entries
+                        .filter((entry) => entry.isIntersecting)
+                        .sort((a, b) => {
+                            return b.intersectionRatio - a.intersectionRatio;
+                        });
+
+                    if (visibleEntries.length === 0) {
+                        return;
+                    }
+
+                    const currentId = visibleEntries[0].target.id;
 
                     sectionLinks.forEach((link) => {
-                        const isCurrent =
-                            link.getAttribute("href") === `#${currentId}`;
+                        const linkTarget = link.getAttribute("href");
+                        const isCurrent = linkTarget === `#${currentId}`;
 
                         if (isCurrent) {
                             link.setAttribute("aria-current", "location");
@@ -178,120 +260,188 @@ document.addEventListener("DOMContentLoaded", () => {
                             link.removeAttribute("aria-current");
                         }
                     });
-                });
-            },
-            {
-                rootMargin: "-25% 0px -65% 0px",
-                threshold: 0
+                },
+                {
+                    rootMargin: "-25% 0px -60% 0px",
+                    threshold: [0, 0.1, 0.25, 0.5]
+                }
+            );
+
+            sections.forEach((section) => {
+                sectionObserver.observe(section);
+            });
+        }
+
+
+        /* =====================================================
+           06. CARGA Y ERRORES DE IMÁGENES
+        ===================================================== */
+
+        const images = document.querySelectorAll("img");
+
+        images.forEach((image) => {
+
+            /*
+             * Decodificación asíncrona cuando no está configurada
+             * explícitamente en el HTML.
+             */
+
+            if (!image.hasAttribute("decoding")) {
+                image.setAttribute("decoding", "async");
             }
+
+            const markImageAsLoaded = () => {
+                image.classList.add("image-loaded");
+                image.classList.remove("image-error");
+            };
+
+            const markImageAsError = () => {
+                image.classList.remove("image-loaded");
+                image.classList.add("image-error");
+
+                console.warn(
+                    "Kites Air: no se ha podido cargar una imagen:",
+                    image.currentSrc || image.src
+                );
+            };
+
+            /*
+             * Comprueba las imágenes que ya han terminado de cargar
+             * antes de registrar los eventos.
+             */
+
+            if (image.complete) {
+                if (image.naturalWidth > 0) {
+                    markImageAsLoaded();
+                } else {
+                    markImageAsError();
+                }
+            } else {
+                image.addEventListener("load", markImageAsLoaded, {
+                    once: true
+                });
+
+                image.addEventListener("error", markImageAsError, {
+                    once: true
+                });
+            }
+        });
+
+
+        /* =====================================================
+           07. ENLACES INTERNOS Y DESPLAZAMIENTO SUAVE
+        ===================================================== */
+
+        const internalLinks = document.querySelectorAll(
+            'a[href^="#"]:not([href="#"])'
         );
 
-        sections.forEach((section) => {
-            sectionObserver.observe(section);
-        });
-    }
+        internalLinks.forEach((link) => {
 
+            link.addEventListener("click", (event) => {
 
-    /* =====================================================
-       05. TARJETAS DE AERONAVES
-    ===================================================== */
+                /*
+                 * Solo procesamos enlaces a elementos existentes
+                 * en esta misma página.
+                 */
 
-    const aircraftCards = document.querySelectorAll(".aircraft-card");
+                const href = link.getAttribute("href");
 
-    aircraftCards.forEach((card) => {
+                if (!href || href.length < 2) {
+                    return;
+                }
 
-        const image = card.querySelector(".aircraft-image img");
+                let targetId;
 
-        if (!image) return;
+                try {
+                    targetId = decodeURIComponent(href.slice(1));
+                } catch {
+                    return;
+                }
 
-        // Añade una clase cuando la imagen se ha cargado.
-        const markImageAsLoaded = () => {
-            image.classList.add("image-loaded");
-        };
+                const target = document.getElementById(targetId);
 
-        if (image.complete && image.naturalWidth > 0) {
-            markImageAsLoaded();
-        } else {
-            image.addEventListener("load", markImageAsLoaded, {
-                once: true
+                if (!target) {
+                    return;
+                }
+
+                /*
+                 * Dejamos que el navegador gestione los enlaces
+                 * si se mantiene pulsada una tecla modificadora.
+                 */
+
+                if (
+                    event.ctrlKey ||
+                    event.metaKey ||
+                    event.shiftKey ||
+                    event.altKey ||
+                    event.button !== 0
+                ) {
+                    return;
+                }
+
+                event.preventDefault();
+
+                target.scrollIntoView({
+                    behavior: prefersReducedMotion ? "auto" : "smooth",
+                    block: "start"
+                });
+
+                /*
+                 * Actualiza el fragmento de la URL sin generar
+                 * un salto brusco ni añadir entradas al historial.
+                 */
+
+                try {
+                    if (window.history && window.history.replaceState) {
+                        window.history.replaceState(
+                            null,
+                            "",
+                            `#${encodeURIComponent(targetId)}`
+                        );
+                    }
+                } catch (error) {
+                    console.warn(
+                        "Kites Air: no se ha podido actualizar la URL.",
+                        error
+                    );
+                }
             });
+        });
+
+
+        /* =====================================================
+           08. PREVENCIÓN DE ERRORES EN ELEMENTOS OPCIONALES
+        ===================================================== */
+
+        /*
+         * No se presupone que todos los elementos existan en todas
+         * las páginas. Esto permite reutilizar el script en páginas
+         * con estructuras ligeramente distintas.
+         */
+
+        const mainContent = document.querySelector("main");
+
+        if (mainContent && !mainContent.hasAttribute("tabindex")) {
+            /*
+             * No añadimos tabindex automáticamente: el contenido
+             * principal no necesita recibir el foco por defecto.
+             */
         }
 
-        // Si la imagen falla, evita mantener una imagen rota.
-        image.addEventListener("error", () => {
-            image.classList.add("image-error");
-            image.setAttribute("alt", "Imagen de aeronave no disponible");
-        }, {
-            once: true
-        });
+
+        /* =====================================================
+           09. MENSAJE DE DESARROLLO
+        ===================================================== */
+
+        console.info(
+            "%cKITES AIR",
+            "color: #e63946; font-size: 18px; font-weight: bold;"
+        );
+
+        console.info(
+            "Sitio web inicializado correctamente."
+        );
+
     });
-
-
-    /* =====================================================
-       06. ENLACES INTERNOS CON DESPLAZAMIENTO SUAVE
-    ===================================================== */
-
-    const internalLinks = document.querySelectorAll(
-        'a[href^="#"]:not([href="#"])'
-    );
-
-    internalLinks.forEach((link) => {
-
-        link.addEventListener("click", (event) => {
-            const targetId = link.getAttribute("href").slice(1);
-            const target = document.getElementById(targetId);
-
-            if (!target) return;
-
-            event.preventDefault();
-
-            target.scrollIntoView({
-                behavior: prefersReducedMotion ? "auto" : "smooth",
-                block: "start"
-            });
-
-            // Actualiza la dirección sin provocar un salto brusco.
-            if (history.replaceState) {
-                history.replaceState(null, "", `#${targetId}`);
-            }
-        });
-    });
-
-
-    /* =====================================================
-       07. CARGA DE IMÁGENES
-    ===================================================== */
-
-    const images = document.querySelectorAll("img");
-
-    images.forEach((image) => {
-
-        if (!image.hasAttribute("decoding")) {
-            image.setAttribute("decoding", "async");
-        }
-
-        image.addEventListener("error", () => {
-            console.warn(
-                "KRATS Aerospace: no se ha podido cargar una imagen:",
-                image.currentSrc || image.src
-            );
-        }, {
-            once: true
-        });
-    });
-
-
-    /* =====================================================
-       08. AÑO Y CONSOLA DE DESARROLLO
-    ===================================================== */
-
-    console.info(
-        "%cKRATS AEROSPACE",
-        "color: #e63946; font-size: 18px; font-weight: bold;"
-    );
-
-    console.info(
-        "Ingeniería aeronáutica para conectar el mundo."
-    );
-
-});
+})();
