@@ -1,7 +1,8 @@
 /* =========================================================
-   KRATS AEROSPACE
+   KITES AIR
    Web corporativa principal
    Archivo: style.css
+   Versión corregida y adaptada al index.html actualizado
 ========================================================= */
 
 /* =========================================================
@@ -12,6 +13,7 @@
     --navy: #071525;
     --navy-light: #0d2239;
     --navy-medium: #132c46;
+    --navy-dark: #040d17;
 
     --red: #e63946;
     --red-dark: #c62836;
@@ -23,51 +25,83 @@
     --dark-grey: #536171;
     --text-dark: #182433;
 
-    --font-main: "Segoe UI", Arial, sans-serif;
+    --font-main: "Montserrat", "Segoe UI", Arial, sans-serif;
 
     --container-width: 1240px;
     --page-gutter: 6%;
 
+    --header-height: 88px;
     --transition: 0.3s ease;
     --shadow: 0 18px 45px rgba(7, 21, 37, 0.12);
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
 }
 
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 100px;
+    scroll-padding-top: calc(var(--header-height) + 20px);
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
 }
 
 body {
-    font-family: var(--font-main);
+    min-width: 320px;
+    overflow-x: hidden;
+
     background: var(--white);
     color: var(--text-dark);
+
+    font-family: var(--font-main);
+    font-size: 16px;
     line-height: 1.7;
-    overflow-x: hidden;
+
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 }
 
 body,
 button,
-a {
+input,
+textarea,
+select {
     font-family: var(--font-main);
 }
 
-img {
+body.menu-open {
+    overflow: hidden;
+}
+
+img,
+picture,
+svg {
     display: block;
-    width: 100%;
     max-width: 100%;
+}
+
+img {
+    width: 100%;
     object-fit: cover;
 }
 
 a {
     color: inherit;
     text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
 }
 
 button {
@@ -80,12 +114,25 @@ a {
 }
 
 button:focus-visible,
-a:focus-visible {
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
     outline: 3px solid var(--red);
     outline-offset: 5px;
 }
 
-ul {
+button {
+    cursor: pointer;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+ul,
+ol {
     list-style: none;
 }
 
@@ -96,6 +143,12 @@ p {
 ::selection {
     background: var(--red);
     color: var(--white);
+}
+
+section[id],
+header[id],
+footer[id] {
+    scroll-margin-top: calc(var(--header-height) + 20px);
 }
 
 .container {
@@ -119,11 +172,38 @@ p {
     text-transform: uppercase;
 }
 
+/* Enlace para saltar directamente al contenido principal. */
+
+.skip-link {
+    position: fixed;
+    top: 12px;
+    left: 12px;
+    z-index: 2000;
+
+    padding: 12px 18px;
+
+    transform: translateY(-160%);
+
+    background: var(--white);
+    color: var(--navy);
+    border: 2px solid var(--red);
+
+    font-size: 0.9rem;
+    font-weight: 800;
+
+    transition: transform var(--transition);
+}
+
+.skip-link:focus {
+    transform: translateY(0);
+}
+
 
 /* =========================================================
    02. BOTONES Y ENLACES
 ========================================================= */
 
+.btn,
 .button {
     display: inline-flex;
     align-items: center;
@@ -133,39 +213,47 @@ p {
     min-height: 54px;
     padding: 15px 25px;
 
+    border: 1px solid transparent;
+    border-radius: 2px;
+
     font-size: 0.84rem;
     font-weight: 700;
     line-height: 1.4;
-
-    border: 1px solid transparent;
-    border-radius: 2px;
+    text-align: center;
 
     transition:
         background var(--transition),
         color var(--transition),
         border-color var(--transition),
-        transform var(--transition);
+        transform var(--transition),
+        box-shadow var(--transition);
 }
 
+.btn:hover,
 .button:hover {
     transform: translateY(-3px);
 }
 
+.btn-primary,
 .button-primary {
     background: var(--red);
     color: var(--white);
 }
 
+.btn-primary:hover,
 .button-primary:hover {
     background: var(--red-dark);
+    box-shadow: 0 8px 22px rgba(230, 57, 70, 0.2);
 }
 
+.btn-secondary,
 .button-secondary {
     color: var(--white);
     border-color: rgba(255, 255, 255, 0.65);
     background: rgba(255, 255, 255, 0.04);
 }
 
+.btn-secondary:hover,
 .button-secondary:hover {
     color: var(--navy);
     background: var(--white);
@@ -178,12 +266,13 @@ p {
     gap: 12px;
 
     width: fit-content;
+    max-width: 100%;
     padding-bottom: 5px;
+
+    border-bottom: 1px solid rgba(230, 57, 70, 0.45);
 
     font-size: 0.83rem;
     font-weight: 750;
-
-    border-bottom: 1px solid rgba(230, 57, 70, 0.45);
 
     transition:
         gap var(--transition),
@@ -224,12 +313,14 @@ p {
 }
 
 .navbar {
-    min-height: 88px;
+    position: relative;
+
+    min-height: var(--header-height);
 
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 35px;
+    gap: 30px;
 }
 
 .logo {
@@ -241,12 +332,15 @@ p {
     color: var(--white);
 }
 
+.logo-mark,
 .logo-symbol {
     width: 43px;
     height: 43px;
 
     display: grid;
     place-items: center;
+
+    flex-shrink: 0;
 
     color: var(--white);
     background: var(--red);
@@ -273,16 +367,17 @@ p {
 .logo-text small {
     margin-top: 5px;
 
+    color: #b5c2d0;
+
     font-size: 0.57rem;
     font-weight: 600;
-    letter-spacing: 0.31em;
-    color: #b5c2d0;
+    letter-spacing: 0.25em;
 }
 
 .nav-links {
     display: flex;
     align-items: center;
-    gap: clamp(15px, 2vw, 30px);
+    gap: clamp(13px, 1.7vw, 25px);
 }
 
 .nav-links a {
@@ -292,7 +387,8 @@ p {
     align-items: center;
 
     color: #d8e0e9;
-    font-size: 0.76rem;
+
+    font-size: 0.73rem;
     font-weight: 650;
 
     transition: color var(--transition);
@@ -305,8 +401,8 @@ p {
     left: 0;
 
     height: 2px;
-    content: "";
 
+    content: "";
     background: var(--red);
 
     transform: scaleX(0);
@@ -315,17 +411,19 @@ p {
     transition: transform var(--transition);
 }
 
-.nav-links a:not(.nav-cta):hover {
+.nav-links a:not(.nav-cta):hover,
+.nav-links a:not(.nav-cta)[aria-current="location"] {
     color: var(--white);
 }
 
-.nav-links a:not(.nav-cta):hover::after {
+.nav-links a:not(.nav-cta):hover::after,
+.nav-links a:not(.nav-cta)[aria-current="location"]::after {
     transform: scaleX(1);
 }
 
 .nav-links .nav-cta {
     min-height: 42px;
-    padding: 10px 17px;
+    padding: 10px 16px;
 
     color: var(--white);
     background: var(--red);
@@ -342,6 +440,7 @@ p {
 
 .menu-toggle {
     display: none;
+
     width: 45px;
     height: 45px;
 
@@ -350,8 +449,11 @@ p {
     flex-direction: column;
     gap: 6px;
 
+    flex-shrink: 0;
+
     border: 1px solid rgba(255, 255, 255, 0.18);
     background: transparent;
+
     cursor: pointer;
 }
 
@@ -374,36 +476,44 @@ p {
 
 .hero {
     position: relative;
+    isolation: isolate;
+
     min-height: 720px;
-    min-height: min(790px, calc(100svh - 88px));
+    min-height: min(790px, calc(100svh - var(--header-height)));
 
     display: flex;
     align-items: center;
 
     overflow: hidden;
-    isolation: isolate;
 
     color: var(--white);
     background: var(--navy);
 }
 
+.hero-background,
 .hero-image,
 .hero-overlay {
     position: absolute;
     inset: 0;
-    z-index: -1;
 }
 
+.hero-background,
+.hero-image {
+    z-index: -2;
+    overflow: hidden;
+}
+
+.hero-background img,
 .hero-image img {
     width: 100%;
     height: 100%;
-
     object-position: center 48%;
-
     animation: hero-reveal 1.2s ease both;
 }
 
 .hero-overlay {
+    z-index: -1;
+
     background:
         linear-gradient(
             90deg,
@@ -420,6 +530,7 @@ p {
 
 .hero-content {
     position: relative;
+
     padding-top: 65px;
     padding-bottom: 100px;
 
@@ -434,9 +545,10 @@ p {
     max-width: 850px;
 
     font-size: clamp(3.3rem, 6.4vw, 6.3rem);
-    font-weight: 750;
+    font-weight: 800;
     letter-spacing: -0.065em;
     line-height: 0.99;
+    text-wrap: balance;
 }
 
 .hero h1 span {
@@ -448,6 +560,7 @@ p {
     margin-top: 29px;
 
     color: #d1d9e3;
+
     font-size: clamp(0.98rem, 1.2vw, 1.1rem);
     line-height: 1.9;
 }
@@ -456,7 +569,41 @@ p {
     display: flex;
     flex-wrap: wrap;
     gap: 14px;
+
     margin-top: 34px;
+}
+
+.hero-disclaimer {
+    max-width: 620px;
+    margin-top: 22px;
+
+    color: #c4ced9;
+    font-size: 0.73rem;
+    line-height: 1.7;
+}
+
+.hero-scroll {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    padding-top: 22px;
+    padding-bottom: 22px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+
+    color: #d1d9e3;
+
+    font-size: 0.67rem;
+    font-weight: 650;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
 }
 
 .hero-caption {
@@ -471,9 +618,12 @@ p {
     gap: 20px;
 
     padding-top: 22px;
+    padding-bottom: 22px;
+
     border-top: 1px solid rgba(255, 255, 255, 0.3);
 
     color: #d1d9e3;
+
     font-size: 0.67rem;
     font-weight: 650;
     letter-spacing: 0.1em;
@@ -485,6 +635,7 @@ p {
    05. PRESENTACIÓN DE LA EMPRESA
 ========================================================= */
 
+.intro,
 .company-intro {
     background: var(--white);
 }
@@ -501,10 +652,12 @@ p {
     margin-top: 25px;
 
     color: var(--navy);
+
     font-size: clamp(2.25rem, 4.2vw, 4rem);
-    font-weight: 750;
+    font-weight: 800;
     letter-spacing: -0.055em;
     line-height: 1.13;
+    text-wrap: balance;
 }
 
 .intro-heading h2 span {
@@ -521,6 +674,7 @@ p {
     margin-bottom: 21px;
 
     color: var(--dark-grey);
+
     font-size: 0.96rem;
     line-height: 1.95;
 }
@@ -552,16 +706,20 @@ p {
     margin-top: 15px;
 
     color: var(--navy);
+
     font-size: clamp(2.2rem, 4vw, 3.65rem);
-    font-weight: 750;
+    font-weight: 800;
     letter-spacing: -0.055em;
     line-height: 1.13;
+    text-wrap: balance;
 }
 
+.section-description,
 .section-intro {
     max-width: 390px;
 
     color: var(--dark-grey);
+
     font-size: 0.92rem;
     line-height: 1.9;
 }
@@ -591,6 +749,7 @@ p {
 
 .aircraft-image {
     position: relative;
+
     display: block;
 
     aspect-ratio: 1.35 / 1;
@@ -602,6 +761,7 @@ p {
 .aircraft-image::after {
     position: absolute;
     inset: 0;
+
     content: "";
 
     background: linear-gradient(
@@ -630,6 +790,7 @@ p {
     z-index: 1;
 
     color: var(--white);
+
     font-size: 0.75rem;
     font-weight: 800;
     letter-spacing: 0.12em;
@@ -646,24 +807,28 @@ p {
 
 .aircraft-info h3 {
     color: var(--navy);
+
     font-size: clamp(1.45rem, 2vw, 1.9rem);
     font-weight: 800;
     letter-spacing: -0.04em;
+    line-height: 1.25;
 }
 
 .aircraft-category {
     margin-top: 3px;
+
     color: var(--red);
+
     font-size: 0.79rem;
     font-weight: 700;
 }
 
 .aircraft-info > p:not(.eyebrow):not(.aircraft-category) {
-    min-height: 116px;
     margin-top: 18px;
     margin-bottom: 24px;
 
     color: var(--dark-grey);
+
     font-size: 0.86rem;
     line-height: 1.85;
 }
@@ -672,18 +837,20 @@ p {
     color: var(--navy);
 }
 
+.content-disclaimer,
 .catalogue-note {
     max-width: 850px;
     margin-top: 28px;
 
     color: #758293;
+
     font-size: 0.75rem;
     line-height: 1.8;
 }
 
 
 /* =========================================================
-   07. ÁREAS DE ACTIVIDAD
+   07. SOLUCIONES Y ÁREAS DE ACTIVIDAD
 ========================================================= */
 
 .solutions-section {
@@ -695,10 +862,12 @@ p {
     color: var(--white);
 }
 
+.solutions-section .section-description,
 .solutions-section .section-intro {
     color: #aab8c8;
 }
 
+.solutions-grid,
 .solutions-list {
     border-top: 1px solid rgba(255, 255, 255, 0.16);
 }
@@ -709,11 +878,13 @@ p {
     align-items: start;
     gap: 30px;
 
-    padding: 38px 0;
+    padding-block: 38px;
 
     border-bottom: 1px solid rgba(255, 255, 255, 0.16);
 
-    transition: padding var(--transition);
+    transition:
+        padding var(--transition),
+        background var(--transition);
 }
 
 .solution-item:hover {
@@ -721,10 +892,12 @@ p {
     padding-left: 10px;
 }
 
+.solution-number,
 .solution-index {
     padding-top: 8px;
 
     color: var(--red);
+
     font-size: 0.8rem;
     font-weight: 800;
     letter-spacing: 0.12em;
@@ -732,8 +905,9 @@ p {
 
 .solution-content h3 {
     color: var(--white);
+
     font-size: clamp(1.6rem, 3vw, 2.45rem);
-    font-weight: 700;
+    font-weight: 750;
     letter-spacing: -0.045em;
     line-height: 1.2;
 }
@@ -744,12 +918,19 @@ p {
     margin-bottom: 21px;
 
     color: #b7c3d0;
+
     font-size: 0.9rem;
     line-height: 1.9;
 }
 
 .solution-content .text-link {
     color: var(--white);
+}
+
+.solution-arrow {
+    justify-self: end;
+    color: var(--red);
+    font-size: 1.4rem;
 }
 
 .solution-tag {
@@ -776,31 +957,41 @@ p {
 
 .engineering-section {
     position: relative;
+    isolation: isolate;
+
     min-height: 600px;
 
     display: flex;
     align-items: center;
 
     overflow: hidden;
-    isolation: isolate;
 
     color: var(--white);
     background: var(--navy-medium);
 }
 
 .engineering-image,
+.engineering-visual,
 .engineering-overlay {
     position: absolute;
     inset: 0;
-    z-index: -1;
+}
+
+.engineering-image,
+.engineering-visual {
+    z-index: -2;
+    overflow: hidden;
 }
 
 .engineering-image img {
+    width: 100%;
     height: 100%;
     object-position: center 45%;
 }
 
 .engineering-overlay {
+    z-index: -1;
+
     background: linear-gradient(
         90deg,
         rgba(7, 21, 37, 0.97) 0%,
@@ -810,8 +1001,8 @@ p {
 }
 
 .engineering-content {
-    padding-top: 110px;
-    padding-bottom: 110px;
+    position: relative;
+    padding-block: 110px;
 }
 
 .engineering-content h2 {
@@ -819,10 +1010,12 @@ p {
     margin-top: 22px;
 
     color: var(--white);
+
     font-size: clamp(2.6rem, 5vw, 4.8rem);
-    font-weight: 750;
+    font-weight: 800;
     letter-spacing: -0.06em;
     line-height: 1.08;
+    text-wrap: balance;
 }
 
 .engineering-content > p:not(.eyebrow) {
@@ -831,8 +1024,106 @@ p {
     margin-bottom: 30px;
 
     color: #d0d9e3;
+
     font-size: 0.95rem;
     line-height: 1.95;
+}
+
+.engineering-heading {
+    max-width: 800px;
+}
+
+.engineering-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(280px, 0.8fr);
+    align-items: center;
+    gap: 50px;
+}
+
+.engineering-visual {
+    position: relative;
+    min-height: 320px;
+    overflow: hidden;
+}
+
+.engineering-orbit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    aspect-ratio: 1;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    border-radius: 50%;
+
+    transform: translate(-50%, -50%);
+}
+
+.orbit-one {
+    width: 180px;
+}
+
+.orbit-two {
+    width: 260px;
+}
+
+.orbit-three {
+    width: 340px;
+}
+
+.engineering-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 110px;
+    height: 110px;
+
+    display: grid;
+    place-items: center;
+
+    border: 1px solid rgba(230, 57, 70, 0.7);
+    border-radius: 50%;
+
+    background: rgba(7, 21, 37, 0.9);
+
+    transform: translate(-50%, -50%);
+}
+
+.engineering-symbol {
+    color: var(--red);
+    font-size: 2.3rem;
+    font-weight: 900;
+}
+
+.engineering-label {
+    position: absolute;
+    z-index: 1;
+
+    padding: 8px 12px;
+
+    background: var(--navy);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+
+    color: #e0e7ef;
+
+    font-size: 0.68rem;
+    font-weight: 700;
+}
+
+.label-one {
+    top: 12%;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.label-two {
+    right: 0;
+    bottom: 18%;
+}
+
+.label-three {
+    bottom: 18%;
+    left: 0;
 }
 
 
@@ -876,6 +1167,7 @@ p {
     margin-bottom: 25px;
 
     color: var(--red);
+
     font-size: 0.76rem;
     font-weight: 850;
     letter-spacing: 0.13em;
@@ -885,12 +1177,15 @@ p {
     margin-bottom: 12px;
 
     color: var(--navy);
+
     font-size: 1.3rem;
     font-weight: 750;
+    line-height: 1.35;
 }
 
 .principle-card p {
     color: var(--dark-grey);
+
     font-size: 0.87rem;
     line-height: 1.85;
 }
@@ -916,10 +1211,12 @@ p {
     margin-top: 19px;
 
     color: var(--navy);
+
     font-size: clamp(2.5rem, 4.5vw, 4.2rem);
-    font-weight: 750;
+    font-weight: 800;
     letter-spacing: -0.06em;
     line-height: 1.1;
+    text-wrap: balance;
 }
 
 .contact-heading > p:not(.eyebrow) {
@@ -927,6 +1224,7 @@ p {
     margin-top: 24px;
 
     color: var(--dark-grey);
+
     font-size: 0.95rem;
     line-height: 1.9;
 }
@@ -941,6 +1239,7 @@ p {
 
 .contact-panel-label {
     color: var(--red);
+
     font-size: 0.7rem;
     font-weight: 800;
     letter-spacing: 0.17em;
@@ -950,9 +1249,11 @@ p {
     margin-top: 14px;
 
     color: var(--navy);
+
     font-size: 2rem;
-    font-weight: 750;
+    font-weight: 800;
     letter-spacing: -0.04em;
+    line-height: 1.2;
 }
 
 .contact-panel > p:not(.contact-panel-label):not(.contact-note) {
@@ -960,10 +1261,12 @@ p {
     margin-bottom: 25px;
 
     color: var(--dark-grey);
+
     font-size: 0.9rem;
     line-height: 1.9;
 }
 
+.contact-panel .btn,
 .contact-panel .button {
     max-width: 100%;
     overflow-wrap: anywhere;
@@ -973,7 +1276,8 @@ p {
 .contact-note {
     margin-top: 17px;
 
-    color: #8a96a5;
+    color: #788596;
+
     font-size: 0.7rem;
     line-height: 1.7;
 }
@@ -985,19 +1289,28 @@ p {
 
 .site-footer {
     color: var(--white);
-    background: #040d17;
+    background: var(--navy-dark);
 }
 
-.footer-main {
+.footer-content {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 30px;
 
-    padding-top: 45px;
-    padding-bottom: 45px;
+    padding-block: 45px;
 
     border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.footer-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+
+    color: var(--white);
+    font-weight: 800;
+    letter-spacing: 0.08em;
 }
 
 .footer-statement {
@@ -1023,8 +1336,7 @@ p {
     justify-content: space-between;
     gap: 25px;
 
-    padding-top: 25px;
-    padding-bottom: 25px;
+    padding-block: 25px;
 }
 
 .footer-bottom p {
@@ -1051,7 +1363,7 @@ p {
 
 
 /* =========================================================
-   12. ANIMACIONES
+   12. ANIMACIONES Y APARICIÓN AL DESPLAZARSE
 ========================================================= */
 
 @keyframes hero-reveal {
@@ -1078,6 +1390,46 @@ p {
     }
 }
 
+/*
+   Estas clases se utilizan desde script.js.
+   Si JavaScript está desactivado, el contenido sigue visible.
+*/
+
+.js-enabled .reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(24px);
+
+    transition:
+        opacity 0.7s ease,
+        transform 0.7s ease;
+}
+
+.js-enabled .reveal-on-scroll.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.reveal-on-scroll {
+    scroll-margin-top: calc(var(--header-height) + 20px);
+}
+
+/* Estado de carga de imágenes controlado desde JavaScript. */
+
+img.image-loaded {
+    opacity: 1;
+}
+
+img.image-error {
+    object-fit: contain;
+    background: #e5e9ee;
+}
+
+/* Evita que una imagen marcada como error parezca una foto válida. */
+
+img.image-error::after {
+    content: none;
+}
+
 
 /* =========================================================
    13. TABLETS Y PORTÁTILES
@@ -1093,15 +1445,15 @@ p {
     }
 
     .nav-links {
-        gap: 17px;
+        gap: 14px;
     }
 
     .nav-links a {
-        font-size: 0.71rem;
+        font-size: 0.68rem;
     }
 
     .nav-links .nav-manual {
-        font-size: 0.66rem;
+        font-size: 0.64rem;
     }
 
     .aircraft-grid {
@@ -1110,10 +1462,6 @@ p {
 
     .aircraft-info {
         padding: 25px 21px 28px;
-    }
-
-    .aircraft-info > p:not(.eyebrow):not(.aircraft-category) {
-        min-height: 145px;
     }
 
     .contact-panel {
@@ -1127,26 +1475,35 @@ p {
 ========================================================= */
 
 @media (max-width: 850px) {
+    :root {
+        --header-height: 78px;
+    }
+
     .navbar {
-        min-height: 78px;
+        min-height: var(--header-height);
     }
 
     .menu-toggle {
-        display: flex;
         position: relative;
         z-index: 1002;
+
+        display: flex;
     }
 
     .nav-links {
         position: absolute;
         top: 100%;
-        right: 0;
-        left: 0;
+        right: calc(var(--page-gutter) * -1);
+        left: calc(var(--page-gutter) * -1);
+        z-index: 1001;
 
         display: none;
         align-items: stretch;
         flex-direction: column;
         gap: 0;
+
+        max-height: calc(100svh - var(--header-height));
+        overflow-y: auto;
 
         padding: 12px var(--page-gutter) 25px;
 
@@ -1166,9 +1523,10 @@ p {
     .nav-links a,
     .nav-links .nav-manual {
         display: flex;
+        align-items: center;
+
         width: 100%;
         min-height: 48px;
-        align-items: center;
 
         font-size: 0.85rem;
     }
@@ -1200,7 +1558,7 @@ p {
 
     .hero {
         min-height: 690px;
-        min-height: min(760px, calc(100svh - 78px));
+        min-height: min(760px, calc(100svh - var(--header-height)));
     }
 
     .hero-overlay {
@@ -1228,11 +1586,12 @@ p {
     }
 
     .section-heading {
-        align-items: start;
+        align-items: flex-start;
         flex-direction: column;
         gap: 20px;
     }
 
+    .section-description,
     .section-intro {
         max-width: 620px;
     }
@@ -1240,10 +1599,6 @@ p {
     .aircraft-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
         gap: 22px;
-    }
-
-    .aircraft-info > p:not(.eyebrow):not(.aircraft-category) {
-        min-height: 0;
     }
 
     .aircraft-card:last-child {
@@ -1263,8 +1618,10 @@ p {
         gap: 20px;
     }
 
-    .solution-tag {
+    .solution-tag,
+    .solution-arrow {
         grid-column: 2;
+        justify-self: start;
         justify-content: flex-start;
         padding-top: 0;
     }
@@ -1286,6 +1643,16 @@ p {
     .contact-panel {
         max-width: 620px;
     }
+
+    .engineering-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .engineering-visual {
+        max-width: 420px;
+        width: 100%;
+        margin-inline: auto;
+    }
 }
 
 
@@ -1296,6 +1663,7 @@ p {
 @media (max-width: 560px) {
     :root {
         --page-gutter: 6%;
+        --header-height: 72px;
     }
 
     .section-padding {
@@ -1303,9 +1671,14 @@ p {
     }
 
     .navbar {
-        min-height: 72px;
+        min-height: var(--header-height);
     }
 
+    .logo {
+        gap: 9px;
+    }
+
+    .logo-mark,
     .logo-symbol {
         width: 38px;
         height: 38px;
@@ -1317,14 +1690,16 @@ p {
     }
 
     .logo-text small {
-        font-size: 0.51rem;
+        font-size: 0.49rem;
+        letter-spacing: 0.2em;
     }
 
     .hero {
         min-height: 700px;
-        min-height: min(760px, calc(100svh - 72px));
+        min-height: min(760px, calc(100svh - var(--header-height)));
     }
 
+    .hero-background img,
     .hero-image img {
         object-position: 57% center;
     }
@@ -1345,7 +1720,7 @@ p {
 
     .hero-content {
         padding-top: 50px;
-        padding-bottom: 110px;
+        padding-bottom: 115px;
     }
 
     .hero-content .eyebrow {
@@ -1370,17 +1745,25 @@ p {
         margin-top: 28px;
     }
 
+    .hero-actions .btn,
     .hero-actions .button {
         width: 100%;
         text-align: center;
     }
 
-    .hero-caption {
+    .hero-disclaimer {
+        font-size: 0.68rem;
+    }
+
+    .hero-caption,
+    .hero-scroll {
         align-items: flex-start;
         flex-direction: column;
         gap: 6px;
 
         padding-top: 15px;
+        padding-bottom: 15px;
+
         font-size: 0.6rem;
     }
 
@@ -1473,6 +1856,26 @@ p {
         font-size: 0.9rem;
     }
 
+    .engineering-visual {
+        min-height: 280px;
+    }
+
+    .orbit-one {
+        width: 145px;
+    }
+
+    .orbit-two {
+        width: 210px;
+    }
+
+    .orbit-three {
+        width: 275px;
+    }
+
+    .engineering-label {
+        font-size: 0.6rem;
+    }
+
     .principle-card {
         padding: 27px 24px;
     }
@@ -1489,13 +1892,14 @@ p {
         font-size: 1.7rem;
     }
 
+    .contact-panel .btn,
     .contact-panel .button {
         width: 100%;
         padding-inline: 12px;
         font-size: 0.76rem;
     }
 
-    .footer-main {
+    .footer-content {
         align-items: flex-start;
         flex-direction: column;
         gap: 22px;
@@ -1530,6 +1934,7 @@ p {
         gap: 8px;
     }
 
+    .logo-mark,
     .logo-symbol {
         width: 34px;
         height: 34px;
@@ -1539,13 +1944,19 @@ p {
         font-size: 1rem;
     }
 
-    .hero-caption {
+    .hero-caption,
+    .hero-scroll {
         font-size: 0.55rem;
     }
 
+    .btn,
     .button {
         padding-inline: 16px;
         font-size: 0.77rem;
+    }
+
+    .contact-panel {
+        padding-inline: 18px;
     }
 }
 
@@ -1562,5 +1973,10 @@ p {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
+    }
+
+    .js-enabled .reveal-on-scroll {
+        opacity: 1;
+        transform: none;
     }
 }
