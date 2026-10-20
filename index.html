@@ -1,28 +1,42 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta name="description" content="Kites Air. Soluciones aeronáuticas para conectar personas, transportar mercancías y llevar la aviación privada más lejos. Ingeniería y desarrollo aeronáutico.">
-
+    <meta
+        name="description"
+        content="Kites Air: ingeniería, diseño conceptual de aeronaves e innovación para conectar el mundo desde el aire."
+    >
     <meta name="theme-color" content="#071525">
+    <meta name="color-scheme" content="light">
 
     <title>Kites Air | Ingeniería que conecta el mundo</title>
+
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet"
+    >
 
     <link rel="stylesheet" href="style.css">
     <script src="script.js" defer></script>
 </head>
 
 <body>
+    <a class="skip-link" href="#contenido-principal">
+        Saltar al contenido principal
+    </a>
 
-    <!-- CABECERA Y NAVEGACIÓN -->
-
+    <!-- NAVEGACIÓN PRINCIPAL -->
     <header class="site-header" id="inicio">
         <nav class="navbar container" aria-label="Navegación principal">
-
-            <a href="#inicio" class="logo" aria-label="Kites Air, inicio">
-                <span class="logo-symbol">K</span>
+            <a class="logo" href="#inicio" aria-label="Kites Air, página principal">
+                <span class="logo-mark" aria-hidden="true">K</span>
                 <span class="logo-text">
                     <strong>KITES</strong>
                     <small>AIR</small>
@@ -31,563 +45,431 @@
 
             <button
                 class="menu-toggle"
+                id="menu-toggle"
                 type="button"
-                aria-label="Abrir menú de navegación"
+                aria-label="Abrir menú"
                 aria-expanded="false"
-                aria-controls="nav-links">
+                aria-controls="nav-links"
+            >
                 <span></span>
                 <span></span>
                 <span></span>
             </button>
 
-            <ul class="nav-links" id="nav-links">
-                <li><a href="#aeronaves">Aeronaves</a></li>
-                <li><a href="#soluciones">Soluciones</a></li>
-                <li><a href="#ingenieria">Ingeniería</a></li>
-                <li><a href="#empresa">La empresa</a></li>
-                <li><a href="#contacto" class="nav-cta">Contactar</a></li>
-                <li><a href="manual.html" class="nav-manual">Manual de marca ↗</a></li>
-            </ul>
-
+            <div class="nav-links" id="nav-links">
+                <a href="#aeronaves">Aeronaves</a>
+                <a href="#soluciones">Soluciones</a>
+                <a href="#ingenieria">Ingeniería</a>
+                <a href="#empresa">Empresa</a>
+                <a href="#contacto">Contacto</a>
+                <a href="manual.html">Manual de marca</a>
+            </div>
         </nav>
     </header>
 
-
-    <main>
-
-        <!-- HERO PRINCIPAL -->
-
+    <main id="contenido-principal">
+        <!-- HERO -->
         <section class="hero" aria-labelledby="hero-title">
-
-            <div class="hero-image">
+            <div class="hero-background" aria-hidden="true">
                 <img
-                    src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=2200&q=85"
-                    alt="Avión comercial de pasajeros en vuelo sobre las nubes"
-                    fetchpriority="high">
+                    src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=2000&q=85"
+                    alt=""
+                    fetchpriority="high"
+                    decoding="async"
+                >
             </div>
 
-            <div class="hero-overlay"></div>
+            <div class="hero-overlay" aria-hidden="true"></div>
 
             <div class="hero-content container">
-                <p class="eyebrow">AVIACIÓN · INGENIERÍA · INNOVACIÓN</p>
+                <p class="eyebrow">INGENIERÍA · PRECISIÓN · FUTURO</p>
 
                 <h1 id="hero-title">
-                    El mundo no<br>
-                    deja de avanzar.<br>
-                    <span>Nosotros tampoco.</span>
+                    Ingeniería que<br>
+                    <span>conecta el mundo.</span>
                 </h1>
 
                 <p class="hero-description">
-                    En Kites Air desarrollamos conceptos aeronáuticos
-                    para conectar destinos, transportar mercancías
-                    y abrir nuevas posibilidades de vuelo.
+                    Exploramos nuevas posibilidades para la aviación
+                    mediante el diseño conceptual, la tecnología y una
+                    visión orientada al futuro.
                 </p>
 
                 <div class="hero-actions">
-                    <a href="#aeronaves" class="button button-primary">
-                        Descubre nuestras aeronaves
+                    <a class="btn btn-primary" href="#aeronaves">
+                        Explorar aeronaves
                     </a>
 
-                    <a href="#empresa" class="button button-secondary">
-                        Conoce Kites Air
+                    <a class="btn btn-secondary" href="#empresa">
+                        Conocer Kites Air
                     </a>
                 </div>
 
-                <div class="hero-caption">
-                    <span>01 / NUESTRA VISIÓN</span>
-                    <span>Diseñada para llegar más lejos</span>
-                </div>
+                <p class="hero-disclaimer">
+                    Concepto de marca aeronáutica. Las aeronaves mostradas
+                    son propuestas ficticias de diseño.
+                </p>
             </div>
 
+            <a class="hero-scroll" href="#empresa" aria-label="Desplazarse a la sección Empresa">
+                <span aria-hidden="true">↓</span>
+                <span>DESCUBRIR</span>
+            </a>
         </section>
 
-
-        <!-- PRESENTACIÓN DE LA EMPRESA -->
-
-        <section class="company-intro section-padding" id="empresa">
+        <!-- EMPRESA -->
+        <section class="intro section-padding" id="empresa" aria-labelledby="intro-title">
             <div class="container intro-grid">
-
                 <div class="intro-heading">
-                    <p class="eyebrow">KITES AIR</p>
+                    <p class="eyebrow">SOBRE KITES AIR</p>
 
-                    <h2>
-                        La aviación es mucho más que volar.
-                        <span>Es hacer que las cosas sucedan.</span>
+                    <h2 id="intro-title">
+                        Una visión diferente
+                        <span>de la aviación.</span>
                     </h2>
                 </div>
 
                 <div class="intro-copy">
                     <p>
-                        Cada día, millones de personas y toneladas de
-                        mercancías dependen de una conexión aérea fiable.
-                        En Kites Air trabajamos en propuestas aeronáuticas
-                        que responden a las necesidades de pasajeros,
-                        operadores y empresas de transporte.
+                        Kites Air es un concepto de marca española centrado
+                        en la ingeniería aeronáutica, el diseño y la
+                        innovación. Nuestra visión parte de una idea:
+                        imaginar soluciones que conecten personas,
+                        industrias y territorios.
                     </p>
 
                     <p>
-                        Nuestra actividad se centra en tres áreas:
-                        aviación comercial, transporte aéreo y aviación
-                        privada. Tres necesidades diferentes unidas por
-                        una misma visión: crear soluciones para que
-                        personas y mercancías lleguen más lejos.
+                        Este proyecto presenta una identidad corporativa
+                        y una familia conceptual de aeronaves. Sus modelos
+                        y prestaciones no representan productos certificados
+                        ni aeronaves disponibles comercialmente.
                     </p>
 
-                    <a href="#soluciones" class="text-link">
-                        Explora nuestras áreas de actividad
+                    <a class="text-link" href="manual.html">
+                        Descubre nuestra identidad
                         <span aria-hidden="true">↗</span>
                     </a>
                 </div>
-
             </div>
         </section>
 
-
-        <!-- CATÁLOGO DE AERONAVES -->
-
-        <section class="aircraft-section section-padding" id="aeronaves">
+        <!-- AERONAVES -->
+        <section class="aircraft-section section-padding" id="aeronaves" aria-labelledby="aircraft-title">
             <div class="container">
-
                 <div class="section-heading">
                     <div>
-                        <p class="eyebrow">NUESTRA FLOTA CONCEPTUAL</p>
-                        <h2>Aeronaves con un propósito.</h2>
+                        <p class="eyebrow">FAMILIA DE AERONAVES</p>
+                        <h2 id="aircraft-title">Diseñadas para imaginar el futuro.</h2>
                     </div>
 
-                    <p class="section-intro">
-                        Desde rutas de pasajeros hasta operaciones
-                        logísticas y viajes privados, cada concepto
-                        responde a una necesidad concreta.
+                    <p class="section-description">
+                        Tres propuestas conceptuales, cada una orientada
+                        a un ámbito diferente de la aviación.
                     </p>
                 </div>
-
 
                 <div class="aircraft-grid">
-
-                    <!-- AVIACIÓN COMERCIAL -->
-
-                    <article class="aircraft-card aircraft-commercial">
-
-                        <a href="#aviacion-comercial"
-                           class="aircraft-image"
-                           aria-label="Descubrir la aviación comercial de Kites Air">
-
+                    <article class="aircraft-card">
+                        <a
+                            class="aircraft-image"
+                            href="#aviacion-comercial"
+                            aria-label="Conocer el concepto Kites KA-100"
+                        >
                             <img
-                                src="https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=85"
-                                alt="Avión comercial de pasajeros en un aeropuerto"
-                                loading="lazy">
-
-                            <span class="aircraft-number">01</span>
+                                src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1000&q=80"
+                                alt="Avión de pasajeros en vuelo, imagen ilustrativa del concepto KA-100"
+                                loading="lazy"
+                                decoding="async"
+                            >
+                            <span class="aircraft-code">KA-100</span>
                         </a>
 
                         <div class="aircraft-info">
-                            <p class="eyebrow">AVIACIÓN COMERCIAL</p>
-
+                            <p class="card-category">AVIACIÓN COMERCIAL</p>
                             <h3>Kites KA-100</h3>
-
-                            <p class="aircraft-category">
-                                Transporte de pasajeros
-                            </p>
-
                             <p>
-                                Concepto de avión de pasillo único pensado
-                                para conectar ciudades y atender rutas
-                                de corta y media distancia.
+                                Concepto de aeronave orientado al transporte
+                                comercial de pasajeros y a la conectividad
+                                entre destinos.
                             </p>
 
-                            <a href="#aviacion-comercial" class="text-link">
-                                Explorar categoría
+                            <a class="text-link" href="#aviacion-comercial">
+                                Explorar concepto
                                 <span aria-hidden="true">↗</span>
                             </a>
                         </div>
-
                     </article>
 
-
-                    <!-- TRANSPORTE AÉREO -->
-
-                    <article class="aircraft-card aircraft-cargo">
-
-                        <a href="#transporte-aereo"
-                           class="aircraft-image"
-                           aria-label="Descubrir las soluciones de transporte aéreo de Kites Air">
-
+                    <article class="aircraft-card">
+                        <a
+                            class="aircraft-image"
+                            href="#transporte-aereo"
+                            aria-label="Conocer el concepto Kites KT-200"
+                        >
                             <img
-                                src="https://images.unsplash.com/photo-1606768666853-403c90a981ad?auto=format&fit=crop&w=1200&q=85"
-                                alt="Aeronave en un entorno aeroportuario"
-                                loading="lazy">
-
-                            <span class="aircraft-number">02</span>
+                                src="https://images.unsplash.com/photo-1570710891163-6d3b5c47248b?auto=format&fit=crop&w=1000&q=80"
+                                alt="Aeronave de transporte, imagen ilustrativa del concepto KT-200"
+                                loading="lazy"
+                                decoding="async"
+                            >
+                            <span class="aircraft-code">KT-200</span>
                         </a>
 
                         <div class="aircraft-info">
-                            <p class="eyebrow">TRANSPORTE AÉREO</p>
-
+                            <p class="card-category">TRANSPORTE AÉREO</p>
                             <h3>Kites KT-200</h3>
-
-                            <p class="aircraft-category">
-                                Carga y logística
-                            </p>
-
                             <p>
-                                Concepto de transporte dedicado a la
-                                logística aérea, con especial atención
-                                a la carga, la descarga y la conexión
-                                entre centros logísticos.
+                                Propuesta conceptual centrada en las
+                                posibilidades del transporte aéreo
+                                de mercancías y las operaciones logísticas.
                             </p>
 
-                            <a href="#transporte-aereo" class="text-link">
-                                Explorar categoría
+                            <a class="text-link" href="#transporte-aereo">
+                                Explorar concepto
                                 <span aria-hidden="true">↗</span>
                             </a>
                         </div>
-
                     </article>
 
-
-                    <!-- AVIACIÓN PRIVADA -->
-
-                    <article class="aircraft-card aircraft-private">
-
-                        <a href="#aviacion-privada"
-                           class="aircraft-image"
-                           aria-label="Descubrir la aviación privada de Kites Air">
-
+                    <article class="aircraft-card">
+                        <a
+                            class="aircraft-image"
+                            href="#aviacion-privada"
+                            aria-label="Conocer el concepto Kites KP-300"
+                        >
                             <img
-                                src="https://images.unsplash.com/photo-1540962351504-03099e0a754b?auto=format&fit=crop&w=1200&q=85"
-                                alt="Avión ejecutivo en vuelo"
-                                loading="lazy">
-
-                            <span class="aircraft-number">03</span>
+                                src="https://images.unsplash.com/photo-1540962351504-03099e0a754b?auto=format&fit=crop&w=1000&q=80"
+                                alt="Aeronave de uso privado, imagen ilustrativa del concepto KP-300"
+                                loading="lazy"
+                                decoding="async"
+                            >
+                            <span class="aircraft-code">KP-300</span>
                         </a>
 
                         <div class="aircraft-info">
-                            <p class="eyebrow">AVIACIÓN PRIVADA</p>
-
+                            <p class="card-category">AVIACIÓN PRIVADA</p>
                             <h3>Kites KP-300</h3>
-
-                            <p class="aircraft-category">
-                                Aviación ejecutiva
-                            </p>
-
                             <p>
-                                Concepto de avión privado orientado
-                                a ofrecer flexibilidad de itinerario,
-                                privacidad y una experiencia de viaje
-                                adaptada a cada cliente.
+                                Concepto de aviación privada que explora
+                                una experiencia de viaje centrada en
+                                la comodidad y la flexibilidad.
                             </p>
 
-                            <a href="#aviacion-privada" class="text-link">
-                                Explorar categoría
+                            <a class="text-link" href="#aviacion-privada">
+                                Explorar concepto
                                 <span aria-hidden="true">↗</span>
                             </a>
                         </div>
-
                     </article>
-
                 </div>
 
-                <p class="catalogue-note">
-                    Los modelos KA-100, KT-200 y KP-300 son conceptos
-                    ficticios desarrollados para la identidad de Kites Air.
-                    Sus características y prestaciones están pendientes
-                    de definición.
+                <p class="content-disclaimer">
+                    Las denominaciones, imágenes y descripciones de esta
+                    sección tienen carácter ilustrativo. No constituyen
+                    especificaciones técnicas ni afirmaciones de certificación.
                 </p>
-
             </div>
         </section>
 
-
-        <!-- ÁREAS DE ACTIVIDAD -->
-
-        <section class="solutions-section section-padding" id="soluciones">
+        <!-- SOLUCIONES -->
+        <section class="solutions-section section-padding" id="soluciones" aria-labelledby="solutions-title">
             <div class="container">
-
                 <div class="section-heading">
                     <div>
-                        <p class="eyebrow">QUÉ HACEMOS</p>
-                        <h2>Tres formas de conectar el mundo.</h2>
+                        <p class="eyebrow">ÁREAS DE APLICACIÓN</p>
+                        <h2 id="solutions-title">Una visión, distintas posibilidades.</h2>
                     </div>
 
-                    <p class="section-intro">
-                        Entendemos cada operación desde sus necesidades:
-                        pasajeros, mercancías o personas que quieren
-                        viajar a su manera.
+                    <p class="section-description">
+                        La propuesta de Kites Air contempla diferentes
+                        necesidades y escenarios de la actividad aeronáutica.
                     </p>
                 </div>
 
-
-                <div class="solutions-list">
-
+                <div class="solutions-grid">
                     <article class="solution-item" id="aviacion-comercial">
-                        <div class="solution-index">01</div>
-
+                        <span class="solution-number">01</span>
                         <div class="solution-content">
                             <h3>Aviación comercial</h3>
-
                             <p>
-                                Propuestas para el transporte de pasajeros
-                                que consideran la capacidad, la planificación
-                                de rutas, la experiencia a bordo y las
-                                necesidades de operación de las aerolíneas.
+                                Un enfoque conceptual sobre la conectividad
+                                aérea, el transporte de pasajeros y la evolución
+                                de la experiencia de viaje.
                             </p>
-
-                            <a href="#contacto" class="text-link">
-                                Consultar soluciones
-                                <span aria-hidden="true">↗</span>
-                            </a>
                         </div>
-
-                        <div class="solution-tag">
-                            <span>PERSONAS</span>
-                        </div>
+                        <span class="solution-arrow" aria-hidden="true">↗</span>
                     </article>
-
 
                     <article class="solution-item" id="transporte-aereo">
-                        <div class="solution-index">02</div>
-
+                        <span class="solution-number">02</span>
                         <div class="solution-content">
                             <h3>Transporte aéreo</h3>
-
                             <p>
-                                Conceptos y soluciones para operaciones
-                                de carga, distribución logística y conexión
-                                entre centros industriales, comerciales
-                                y redes de transporte.
+                                Ideas orientadas a explorar el papel de la
+                                aviación en la logística, el movimiento de
+                                mercancías y la conexión entre mercados.
                             </p>
-
-                            <a href="#contacto" class="text-link">
-                                Consultar soluciones
-                                <span aria-hidden="true">↗</span>
-                            </a>
                         </div>
-
-                        <div class="solution-tag">
-                            <span>MERCANCÍAS</span>
-                        </div>
+                        <span class="solution-arrow" aria-hidden="true">↗</span>
                     </article>
-
 
                     <article class="solution-item" id="aviacion-privada">
-                        <div class="solution-index">03</div>
-
+                        <span class="solution-number">03</span>
                         <div class="solution-content">
                             <h3>Aviación privada</h3>
-
                             <p>
-                                Propuestas para viajes ejecutivos y privados
-                                que priorizan la flexibilidad, el confort
-                                y la libertad para organizar cada trayecto.
+                                Una propuesta centrada en la flexibilidad,
+                                el diseño y las distintas posibilidades
+                                de la movilidad aérea privada.
                             </p>
-
-                            <a href="#contacto" class="text-link">
-                                Consultar soluciones
-                                <span aria-hidden="true">↗</span>
-                            </a>
                         </div>
-
-                        <div class="solution-tag">
-                            <span>AVIACIÓN EJECUTIVA</span>
-                        </div>
+                        <span class="solution-arrow" aria-hidden="true">↗</span>
                     </article>
+                </div>
+            </div>
+        </section>
 
+        <!-- INGENIERÍA -->
+        <section class="engineering-section section-padding" id="ingenieria" aria-labelledby="engineering-title">
+            <div class="container engineering-grid">
+                <div class="engineering-heading">
+                    <p class="eyebrow">NUESTRA VISIÓN</p>
+
+                    <h2 id="engineering-title">
+                        La innovación comienza con una pregunta.
+                    </h2>
+
+                    <p>
+                        Imaginar, analizar y diseñar son partes esenciales
+                        de cualquier proceso de ingeniería. Kites Air
+                        representa una visión conceptual de ese proceso
+                        aplicado al sector aeronáutico.
+                    </p>
+
+                    <a class="btn btn-primary" href="manual.html#branding">
+                        Conocer nuestra identidad
+                    </a>
                 </div>
 
-            </div>
-        </section>
+                <div class="engineering-visual" aria-label="Principios conceptuales de ingeniería">
+                    <div class="engineering-orbit orbit-one"></div>
+                    <div class="engineering-orbit orbit-two"></div>
+                    <div class="engineering-orbit orbit-three"></div>
 
-
-        <!-- INGENIERÍA Y DESARROLLO -->
-
-        <section class="engineering-section section-padding" id="ingenieria">
-
-            <div class="engineering-image">
-                <img
-                    src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?auto=format&fit=crop&w=1800&q=85"
-                    alt="Entorno técnico de ingeniería y desarrollo industrial"
-                    loading="lazy">
-            </div>
-
-            <div class="engineering-overlay"></div>
-
-            <div class="container engineering-content">
-
-                <p class="eyebrow">INGENIERÍA Y DESARROLLO</p>
-
-                <h2>
-                    Cada aeronave empieza<br>
-                    mucho antes del despegue.
-                </h2>
-
-                <p>
-                    El desarrollo aeronáutico comienza con una pregunta:
-                    ¿qué necesita resolver esta aeronave? A partir de ahí,
-                    el diseño debe considerar la aerodinámica, los
-                    materiales, el mantenimiento y las condiciones reales
-                    de operación.
-                </p>
-
-                <a href="#contacto" class="button button-primary">
-                    Habla con nuestro equipo
-                </a>
-
-            </div>
-
-        </section>
-
-
-        <!-- PRINCIPIOS DE TRABAJO -->
-
-        <section class="principles-section section-padding">
-            <div class="container">
-
-                <div class="section-heading">
-                    <div>
-                        <p class="eyebrow">NUESTRO ENFOQUE</p>
-                        <h2>Diseñar pensando en la operación.</h2>
+                    <div class="engineering-center">
+                        <span class="engineering-symbol" aria-hidden="true">K</span>
+                        <span>KITES AIR</span>
+                        <small>ENGINEERING CONCEPT</small>
                     </div>
 
-                    <p class="section-intro">
-                        Una aeronave debe responder a las necesidades
-                        de quienes la utilizan, la mantienen y dependen
-                        de ella para viajar o transportar mercancías.
-                    </p>
+                    <span class="engineering-label label-one">PRECISIÓN</span>
+                    <span class="engineering-label label-two">DISEÑO</span>
+                    <span class="engineering-label label-three">INNOVACIÓN</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRINCIPIOS -->
+        <section class="principles-section section-padding" aria-labelledby="principles-title">
+            <div class="container">
+                <div class="section-heading">
+                    <div>
+                        <p class="eyebrow">LO QUE NOS DEFINE</p>
+                        <h2 id="principles-title">Principios que guían la visión.</h2>
+                    </div>
                 </div>
 
-
                 <div class="principles-grid">
-
                     <article class="principle-card">
                         <span class="principle-number">01</span>
-                        <h3>Funcionalidad</h3>
+                        <h3>Precisión</h3>
                         <p>
-                            Cada decisión de diseño responde a una
-                            necesidad concreta de pasajeros, operadores
-                            o empresas de transporte.
+                            Valorar el rigor, el detalle y la claridad
+                            en cada etapa del diseño conceptual.
                         </p>
                     </article>
 
                     <article class="principle-card">
                         <span class="principle-number">02</span>
-                        <h3>Eficiencia</h3>
+                        <h3>Innovación</h3>
                         <p>
-                            Consideramos el uso de recursos, el
-                            mantenimiento y la vida operativa como
-                            partes esenciales del diseño aeronáutico.
+                            Explorar nuevas ideas y perspectivas para
+                            imaginar otras posibilidades de la aviación.
                         </p>
                     </article>
 
                     <article class="principle-card">
                         <span class="principle-number">03</span>
-                        <h3>Experiencia</h3>
+                        <h3>Confianza</h3>
                         <p>
-                            Prestamos atención a las necesidades
-                            de pasajeros, tripulaciones, operadores
-                            y equipos de logística.
+                            Comunicar de forma responsable, transparente
+                            y coherente con la naturaleza del proyecto.
                         </p>
                     </article>
-
                 </div>
-
             </div>
         </section>
 
-
         <!-- CONTACTO -->
-
-        <section class="contact-section section-padding" id="contacto">
+        <section class="contact-section section-padding" id="contacto" aria-labelledby="contact-title">
             <div class="container contact-grid">
-
                 <div class="contact-heading">
                     <p class="eyebrow">HABLEMOS</p>
 
-                    <h2>
-                        ¿Qué necesitas llevar más lejos?
+                    <h2 id="contact-title">
+                        Toda gran idea empieza con una conversación.
                     </h2>
 
                     <p>
-                        Si representas a una aerolínea, un operador
-                        logístico o una empresa interesada en aviación
-                        privada, queremos conocer tu proyecto.
+                        ¿Quieres conocer más sobre el concepto Kites Air
+                        o compartir una propuesta relacionada con el proyecto?
                     </p>
                 </div>
 
-
                 <div class="contact-panel">
+                    <span class="contact-panel-label">CONTACTO GENERAL</span>
 
-                    <p class="contact-panel-label">
-                        KITES AIR
-                    </p>
-
-                    <h3>Conectemos ideas.</h3>
+                    <h3>Conectemos.</h3>
 
                     <p>
-                        Escríbenos para hablar sobre nuestras áreas
-                        de actividad, nuestros conceptos de aeronave
-                        o posibles colaboraciones.
+                        Escríbenos para plantear una consulta o iniciar
+                        una conversación sobre el proyecto.
                     </p>
 
-                    <!-- Sustituir por el correo definitivo de la marca -->
-                    <a href="mailto:contacto@kitesair.com"
-                       class="button button-primary">
+                    <!-- Verifica que esta dirección esté operativa antes de publicar. -->
+                    <a
+                        class="btn btn-primary contact-button"
+                        href="mailto:contacto@kitesair.com"
+                    >
                         contacto@kitesair.com
                         <span aria-hidden="true">↗</span>
                     </a>
 
                     <p class="contact-note">
-                        Dirección de ejemplo para el proyecto.
-                        Comprueba su disponibilidad antes de utilizarla.
+                        Dirección de ejemplo pendiente de verificación.
                     </p>
-
                 </div>
-
             </div>
         </section>
-
     </main>
 
-
     <!-- PIE DE PÁGINA -->
-
     <footer class="site-footer">
-        <div class="container footer-main">
-
-            <a href="#inicio" class="logo footer-logo"
-               aria-label="Kites Air, volver al inicio">
-
-                <span class="logo-symbol">K</span>
-
-                <span class="logo-text">
-                    <strong>KITES</strong>
-                    <small>AIR</small>
-                </span>
+        <div class="container footer-content">
+            <a class="footer-logo" href="#inicio" aria-label="Kites Air, volver al inicio">
+                KITES <span>AIR</span>
             </a>
 
-            <p class="footer-statement">
-                Ingeniería aeronáutica para conectar el mundo.
-            </p>
-
-            <a href="#inicio" class="back-to-top">
-                Volver arriba ↑
-            </a>
-
-        </div>
-
-        <div class="container footer-bottom">
             <p>
-                © <span id="current-year">2026</span> Kites Air.
-                Proyecto conceptual.
+                &copy; <span id="current-year">2026</span> Kites Air.
+                Proyecto conceptual de identidad aeronáutica.
             </p>
 
             <div class="footer-links">
-                <a href="#aeronaves">Aeronaves</a>
-                <a href="#soluciones">Soluciones</a>
                 <a href="manual.html">Manual de marca</a>
+                <a href="#inicio">Volver arriba ↑</a>
             </div>
-
         </div>
     </footer>
-
 </body>
 </html>
