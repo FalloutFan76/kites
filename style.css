@@ -1,0 +1,1566 @@
+/* =========================================================
+   KRATS AEROSPACE
+   Web corporativa principal
+   Archivo: style.css
+========================================================= */
+
+/* =========================================================
+   01. VARIABLES Y RESET
+========================================================= */
+
+:root {
+    --navy: #071525;
+    --navy-light: #0d2239;
+    --navy-medium: #132c46;
+
+    --red: #e63946;
+    --red-dark: #c62836;
+
+    --white: #ffffff;
+    --off-white: #f4f6f8;
+    --light-grey: #e5e9ee;
+    --medium-grey: #8995a4;
+    --dark-grey: #536171;
+    --text-dark: #182433;
+
+    --font-main: "Segoe UI", Arial, sans-serif;
+
+    --container-width: 1240px;
+    --page-gutter: 6%;
+
+    --transition: 0.3s ease;
+    --shadow: 0 18px 45px rgba(7, 21, 37, 0.12);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+}
+
+body {
+    font-family: var(--font-main);
+    background: var(--white);
+    color: var(--text-dark);
+    line-height: 1.7;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+body,
+button,
+a {
+    font-family: var(--font-main);
+}
+
+img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    object-fit: cover;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    color: inherit;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible {
+    outline: 3px solid var(--red);
+    outline-offset: 5px;
+}
+
+ul {
+    list-style: none;
+}
+
+p {
+    overflow-wrap: break-word;
+}
+
+::selection {
+    background: var(--red);
+    color: var(--white);
+}
+
+.container {
+    width: min(
+        calc(100% - var(--page-gutter) * 2),
+        var(--container-width)
+    );
+    margin-inline: auto;
+}
+
+.section-padding {
+    padding-block: 120px;
+}
+
+.eyebrow {
+    color: var(--red);
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.19em;
+    line-height: 1.5;
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   02. BOTONES Y ENLACES
+========================================================= */
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+
+    min-height: 54px;
+    padding: 15px 25px;
+
+    font-size: 0.84rem;
+    font-weight: 700;
+    line-height: 1.4;
+
+    border: 1px solid transparent;
+    border-radius: 2px;
+
+    transition:
+        background var(--transition),
+        color var(--transition),
+        border-color var(--transition),
+        transform var(--transition);
+}
+
+.button:hover {
+    transform: translateY(-3px);
+}
+
+.button-primary {
+    background: var(--red);
+    color: var(--white);
+}
+
+.button-primary:hover {
+    background: var(--red-dark);
+}
+
+.button-secondary {
+    color: var(--white);
+    border-color: rgba(255, 255, 255, 0.65);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.button-secondary:hover {
+    color: var(--navy);
+    background: var(--white);
+    border-color: var(--white);
+}
+
+.text-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+
+    width: fit-content;
+    padding-bottom: 5px;
+
+    font-size: 0.83rem;
+    font-weight: 750;
+
+    border-bottom: 1px solid rgba(230, 57, 70, 0.45);
+
+    transition:
+        gap var(--transition),
+        color var(--transition),
+        border-color var(--transition);
+}
+
+.text-link span {
+    color: var(--red);
+    transition: transform var(--transition);
+}
+
+.text-link:hover {
+    gap: 17px;
+    color: var(--red-dark);
+    border-color: var(--red);
+}
+
+.text-link:hover span {
+    transform: translate(2px, -2px);
+}
+
+
+/* =========================================================
+   03. CABECERA Y NAVEGACIÓN
+========================================================= */
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    background: rgba(7, 21, 37, 0.97);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+}
+
+.navbar {
+    min-height: 88px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 35px;
+}
+
+.logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+
+    flex-shrink: 0;
+    color: var(--white);
+}
+
+.logo-symbol {
+    width: 43px;
+    height: 43px;
+
+    display: grid;
+    place-items: center;
+
+    color: var(--white);
+    background: var(--red);
+
+    font-size: 1.5rem;
+    font-weight: 900;
+    font-style: italic;
+
+    transform: skew(-5deg);
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+}
+
+.logo-text strong {
+    font-size: 1.25rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+}
+
+.logo-text small {
+    margin-top: 5px;
+
+    font-size: 0.57rem;
+    font-weight: 600;
+    letter-spacing: 0.31em;
+    color: #b5c2d0;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: clamp(15px, 2vw, 30px);
+}
+
+.nav-links a {
+    position: relative;
+
+    display: inline-flex;
+    align-items: center;
+
+    color: #d8e0e9;
+    font-size: 0.76rem;
+    font-weight: 650;
+
+    transition: color var(--transition);
+}
+
+.nav-links a:not(.nav-cta)::after {
+    position: absolute;
+    right: 0;
+    bottom: -8px;
+    left: 0;
+
+    height: 2px;
+    content: "";
+
+    background: var(--red);
+
+    transform: scaleX(0);
+    transform-origin: left;
+
+    transition: transform var(--transition);
+}
+
+.nav-links a:not(.nav-cta):hover {
+    color: var(--white);
+}
+
+.nav-links a:not(.nav-cta):hover::after {
+    transform: scaleX(1);
+}
+
+.nav-links .nav-cta {
+    min-height: 42px;
+    padding: 10px 17px;
+
+    color: var(--white);
+    background: var(--red);
+}
+
+.nav-links .nav-cta:hover {
+    background: var(--red-dark);
+}
+
+.nav-links .nav-manual {
+    color: #aebccc;
+    font-size: 0.7rem;
+}
+
+.menu-toggle {
+    display: none;
+    width: 45px;
+    height: 45px;
+
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 6px;
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: transparent;
+    cursor: pointer;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 20px;
+    height: 2px;
+
+    background: var(--white);
+
+    transition:
+        transform var(--transition),
+        opacity var(--transition);
+}
+
+
+/* =========================================================
+   04. HERO PRINCIPAL
+========================================================= */
+
+.hero {
+    position: relative;
+    min-height: 720px;
+    min-height: min(790px, calc(100svh - 88px));
+
+    display: flex;
+    align-items: center;
+
+    overflow: hidden;
+    isolation: isolate;
+
+    color: var(--white);
+    background: var(--navy);
+}
+
+.hero-image,
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+
+    object-position: center 48%;
+
+    animation: hero-reveal 1.2s ease both;
+}
+
+.hero-overlay {
+    background:
+        linear-gradient(
+            90deg,
+            rgba(4, 14, 26, 0.94) 0%,
+            rgba(4, 14, 26, 0.78) 40%,
+            rgba(4, 14, 26, 0.26) 100%
+        ),
+        linear-gradient(
+            0deg,
+            rgba(4, 14, 26, 0.55),
+            transparent 40%
+        );
+}
+
+.hero-content {
+    position: relative;
+    padding-top: 65px;
+    padding-bottom: 100px;
+
+    animation: content-reveal 0.9s ease both;
+}
+
+.hero-content .eyebrow {
+    margin-bottom: 26px;
+}
+
+.hero h1 {
+    max-width: 850px;
+
+    font-size: clamp(3.3rem, 6.4vw, 6.3rem);
+    font-weight: 750;
+    letter-spacing: -0.065em;
+    line-height: 0.99;
+}
+
+.hero h1 span {
+    color: #e9edf2;
+}
+
+.hero-description {
+    max-width: 550px;
+    margin-top: 29px;
+
+    color: #d1d9e3;
+    font-size: clamp(0.98rem, 1.2vw, 1.1rem);
+    line-height: 1.9;
+}
+
+.hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 34px;
+}
+
+.hero-caption {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    padding-top: 22px;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+
+    color: #d1d9e3;
+    font-size: 0.67rem;
+    font-weight: 650;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   05. PRESENTACIÓN DE LA EMPRESA
+========================================================= */
+
+.company-intro {
+    background: var(--white);
+}
+
+.intro-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.8fr;
+    align-items: start;
+    gap: clamp(50px, 9vw, 135px);
+}
+
+.intro-heading h2 {
+    max-width: 640px;
+    margin-top: 25px;
+
+    color: var(--navy);
+    font-size: clamp(2.25rem, 4.2vw, 4rem);
+    font-weight: 750;
+    letter-spacing: -0.055em;
+    line-height: 1.13;
+}
+
+.intro-heading h2 span {
+    display: block;
+    margin-top: 8px;
+    color: #8391a1;
+}
+
+.intro-copy {
+    padding-top: 42px;
+}
+
+.intro-copy p {
+    margin-bottom: 21px;
+
+    color: var(--dark-grey);
+    font-size: 0.96rem;
+    line-height: 1.95;
+}
+
+.intro-copy .text-link {
+    margin-top: 12px;
+    color: var(--navy);
+}
+
+
+/* =========================================================
+   06. CATÁLOGO DE AERONAVES
+========================================================= */
+
+.aircraft-section {
+    background: var(--off-white);
+}
+
+.section-heading {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 50px;
+
+    margin-bottom: 54px;
+}
+
+.section-heading h2 {
+    margin-top: 15px;
+
+    color: var(--navy);
+    font-size: clamp(2.2rem, 4vw, 3.65rem);
+    font-weight: 750;
+    letter-spacing: -0.055em;
+    line-height: 1.13;
+}
+
+.section-intro {
+    max-width: 390px;
+
+    color: var(--dark-grey);
+    font-size: 0.92rem;
+    line-height: 1.9;
+}
+
+.aircraft-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 25px;
+}
+
+.aircraft-card {
+    min-width: 0;
+    overflow: hidden;
+
+    background: var(--white);
+    box-shadow: 0 5px 25px rgba(7, 21, 37, 0.035);
+
+    transition:
+        transform var(--transition),
+        box-shadow var(--transition);
+}
+
+.aircraft-card:hover {
+    transform: translateY(-7px);
+    box-shadow: var(--shadow);
+}
+
+.aircraft-image {
+    position: relative;
+    display: block;
+
+    aspect-ratio: 1.35 / 1;
+    overflow: hidden;
+
+    background: #d9e0e8;
+}
+
+.aircraft-image::after {
+    position: absolute;
+    inset: 0;
+    content: "";
+
+    background: linear-gradient(
+        0deg,
+        rgba(7, 21, 37, 0.34),
+        transparent 45%
+    );
+
+    pointer-events: none;
+}
+
+.aircraft-image img {
+    height: 100%;
+
+    transition: transform 0.7s cubic-bezier(0.2, 0.7, 0.3, 1);
+}
+
+.aircraft-card:hover .aircraft-image img {
+    transform: scale(1.055);
+}
+
+.aircraft-number {
+    position: absolute;
+    right: 18px;
+    bottom: 16px;
+    z-index: 1;
+
+    color: var(--white);
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+}
+
+.aircraft-info {
+    padding: 30px 27px 32px;
+}
+
+.aircraft-info .eyebrow {
+    margin-bottom: 14px;
+    font-size: 0.66rem;
+}
+
+.aircraft-info h3 {
+    color: var(--navy);
+    font-size: clamp(1.45rem, 2vw, 1.9rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+}
+
+.aircraft-category {
+    margin-top: 3px;
+    color: var(--red);
+    font-size: 0.79rem;
+    font-weight: 700;
+}
+
+.aircraft-info > p:not(.eyebrow):not(.aircraft-category) {
+    min-height: 116px;
+    margin-top: 18px;
+    margin-bottom: 24px;
+
+    color: var(--dark-grey);
+    font-size: 0.86rem;
+    line-height: 1.85;
+}
+
+.aircraft-info .text-link {
+    color: var(--navy);
+}
+
+.catalogue-note {
+    max-width: 850px;
+    margin-top: 28px;
+
+    color: #758293;
+    font-size: 0.75rem;
+    line-height: 1.8;
+}
+
+
+/* =========================================================
+   07. ÁREAS DE ACTIVIDAD
+========================================================= */
+
+.solutions-section {
+    color: var(--white);
+    background: var(--navy);
+}
+
+.solutions-section .section-heading h2 {
+    color: var(--white);
+}
+
+.solutions-section .section-intro {
+    color: #aab8c8;
+}
+
+.solutions-list {
+    border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.solution-item {
+    display: grid;
+    grid-template-columns: 70px minmax(0, 1fr) 180px;
+    align-items: start;
+    gap: 30px;
+
+    padding: 38px 0;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+
+    transition: padding var(--transition);
+}
+
+.solution-item:hover {
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.solution-index {
+    padding-top: 8px;
+
+    color: var(--red);
+    font-size: 0.8rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+}
+
+.solution-content h3 {
+    color: var(--white);
+    font-size: clamp(1.6rem, 3vw, 2.45rem);
+    font-weight: 700;
+    letter-spacing: -0.045em;
+    line-height: 1.2;
+}
+
+.solution-content p {
+    max-width: 650px;
+    margin-top: 15px;
+    margin-bottom: 21px;
+
+    color: #b7c3d0;
+    font-size: 0.9rem;
+    line-height: 1.9;
+}
+
+.solution-content .text-link {
+    color: var(--white);
+}
+
+.solution-tag {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 9px;
+}
+
+.solution-tag span {
+    padding: 9px 12px;
+
+    color: #c6d0dc;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    font-size: 0.62rem;
+    font-weight: 750;
+    letter-spacing: 0.12em;
+}
+
+
+/* =========================================================
+   08. INGENIERÍA
+========================================================= */
+
+.engineering-section {
+    position: relative;
+    min-height: 600px;
+
+    display: flex;
+    align-items: center;
+
+    overflow: hidden;
+    isolation: isolate;
+
+    color: var(--white);
+    background: var(--navy-medium);
+}
+
+.engineering-image,
+.engineering-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+}
+
+.engineering-image img {
+    height: 100%;
+    object-position: center 45%;
+}
+
+.engineering-overlay {
+    background: linear-gradient(
+        90deg,
+        rgba(7, 21, 37, 0.97) 0%,
+        rgba(7, 21, 37, 0.88) 43%,
+        rgba(7, 21, 37, 0.35) 100%
+    );
+}
+
+.engineering-content {
+    padding-top: 110px;
+    padding-bottom: 110px;
+}
+
+.engineering-content h2 {
+    max-width: 780px;
+    margin-top: 22px;
+
+    color: var(--white);
+    font-size: clamp(2.6rem, 5vw, 4.8rem);
+    font-weight: 750;
+    letter-spacing: -0.06em;
+    line-height: 1.08;
+}
+
+.engineering-content > p:not(.eyebrow) {
+    max-width: 610px;
+    margin-top: 25px;
+    margin-bottom: 30px;
+
+    color: #d0d9e3;
+    font-size: 0.95rem;
+    line-height: 1.95;
+}
+
+
+/* =========================================================
+   09. PRINCIPIOS DE TRABAJO
+========================================================= */
+
+.principles-section {
+    background: var(--white);
+}
+
+.principles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.principle-card {
+    position: relative;
+    min-height: 245px;
+
+    padding: 32px 29px;
+
+    border: 1px solid var(--light-grey);
+    background: var(--white);
+
+    transition:
+        border-color var(--transition),
+        transform var(--transition),
+        box-shadow var(--transition);
+}
+
+.principle-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(230, 57, 70, 0.5);
+    box-shadow: var(--shadow);
+}
+
+.principle-number {
+    display: inline-block;
+    margin-bottom: 25px;
+
+    color: var(--red);
+    font-size: 0.76rem;
+    font-weight: 850;
+    letter-spacing: 0.13em;
+}
+
+.principle-card h3 {
+    margin-bottom: 12px;
+
+    color: var(--navy);
+    font-size: 1.3rem;
+    font-weight: 750;
+}
+
+.principle-card p {
+    color: var(--dark-grey);
+    font-size: 0.87rem;
+    line-height: 1.85;
+}
+
+
+/* =========================================================
+   10. CONTACTO
+========================================================= */
+
+.contact-section {
+    background: var(--off-white);
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 0.75fr;
+    align-items: center;
+    gap: clamp(50px, 9vw, 120px);
+}
+
+.contact-heading h2 {
+    max-width: 600px;
+    margin-top: 19px;
+
+    color: var(--navy);
+    font-size: clamp(2.5rem, 4.5vw, 4.2rem);
+    font-weight: 750;
+    letter-spacing: -0.06em;
+    line-height: 1.1;
+}
+
+.contact-heading > p:not(.eyebrow) {
+    max-width: 510px;
+    margin-top: 24px;
+
+    color: var(--dark-grey);
+    font-size: 0.95rem;
+    line-height: 1.9;
+}
+
+.contact-panel {
+    padding: 42px;
+
+    background: var(--white);
+    border-top: 4px solid var(--red);
+    box-shadow: 0 10px 40px rgba(7, 21, 37, 0.06);
+}
+
+.contact-panel-label {
+    color: var(--red);
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.17em;
+}
+
+.contact-panel h3 {
+    margin-top: 14px;
+
+    color: var(--navy);
+    font-size: 2rem;
+    font-weight: 750;
+    letter-spacing: -0.04em;
+}
+
+.contact-panel > p:not(.contact-panel-label):not(.contact-note) {
+    margin-top: 13px;
+    margin-bottom: 25px;
+
+    color: var(--dark-grey);
+    font-size: 0.9rem;
+    line-height: 1.9;
+}
+
+.contact-panel .button {
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    text-align: center;
+}
+
+.contact-note {
+    margin-top: 17px;
+
+    color: #8a96a5;
+    font-size: 0.7rem;
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   11. PIE DE PÁGINA
+========================================================= */
+
+.site-footer {
+    color: var(--white);
+    background: #040d17;
+}
+
+.footer-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+
+    padding-top: 45px;
+    padding-bottom: 45px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.footer-statement {
+    color: #b5c0cd;
+    font-size: 0.86rem;
+}
+
+.back-to-top {
+    color: var(--white);
+    font-size: 0.78rem;
+    font-weight: 700;
+
+    transition: color var(--transition);
+}
+
+.back-to-top:hover {
+    color: var(--red);
+}
+
+.footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+
+    padding-top: 25px;
+    padding-bottom: 25px;
+}
+
+.footer-bottom p {
+    color: #8e9aaa;
+    font-size: 0.72rem;
+}
+
+.footer-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 23px;
+}
+
+.footer-links a {
+    color: #aeb9c7;
+    font-size: 0.72rem;
+
+    transition: color var(--transition);
+}
+
+.footer-links a:hover {
+    color: var(--white);
+}
+
+
+/* =========================================================
+   12. ANIMACIONES
+========================================================= */
+
+@keyframes hero-reveal {
+    from {
+        opacity: 0.6;
+        transform: scale(1.035);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes content-reveal {
+    from {
+        opacity: 0;
+        transform: translateY(22px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================================
+   13. TABLETS Y PORTÁTILES
+========================================================= */
+
+@media (max-width: 1100px) {
+    :root {
+        --page-gutter: 5%;
+    }
+
+    .navbar {
+        gap: 20px;
+    }
+
+    .nav-links {
+        gap: 17px;
+    }
+
+    .nav-links a {
+        font-size: 0.71rem;
+    }
+
+    .nav-links .nav-manual {
+        font-size: 0.66rem;
+    }
+
+    .aircraft-grid {
+        gap: 18px;
+    }
+
+    .aircraft-info {
+        padding: 25px 21px 28px;
+    }
+
+    .aircraft-info > p:not(.eyebrow):not(.aircraft-category) {
+        min-height: 145px;
+    }
+
+    .contact-panel {
+        padding: 32px;
+    }
+}
+
+
+/* =========================================================
+   14. MENÚ MÓVIL
+========================================================= */
+
+@media (max-width: 850px) {
+    .navbar {
+        min-height: 78px;
+    }
+
+    .menu-toggle {
+        display: flex;
+        position: relative;
+        z-index: 1002;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+
+        display: none;
+        align-items: stretch;
+        flex-direction: column;
+        gap: 0;
+
+        padding: 12px var(--page-gutter) 25px;
+
+        background: var(--navy);
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 18px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    .nav-links li {
+        width: 100%;
+    }
+
+    .nav-links a,
+    .nav-links .nav-manual {
+        display: flex;
+        width: 100%;
+        min-height: 48px;
+        align-items: center;
+
+        font-size: 0.85rem;
+    }
+
+    .nav-links a:not(.nav-cta)::after {
+        display: none;
+    }
+
+    .nav-links .nav-cta {
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .nav-links .nav-manual {
+        color: #aebccc;
+    }
+
+    .menu-toggle[aria-expanded="true"] span:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .menu-toggle[aria-expanded="true"] span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle[aria-expanded="true"] span:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+
+    .hero {
+        min-height: 690px;
+        min-height: min(760px, calc(100svh - 78px));
+    }
+
+    .hero-overlay {
+        background:
+            linear-gradient(
+                90deg,
+                rgba(4, 14, 26, 0.9),
+                rgba(4, 14, 26, 0.48)
+            ),
+            linear-gradient(
+                0deg,
+                rgba(4, 14, 26, 0.55),
+                transparent 60%
+            );
+    }
+
+    .intro-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .intro-copy {
+        max-width: 720px;
+        padding-top: 0;
+    }
+
+    .section-heading {
+        align-items: start;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .section-intro {
+        max-width: 620px;
+    }
+
+    .aircraft-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 22px;
+    }
+
+    .aircraft-info > p:not(.eyebrow):not(.aircraft-category) {
+        min-height: 0;
+    }
+
+    .aircraft-card:last-child {
+        grid-column: 1 / -1;
+    }
+
+    .aircraft-card:last-child .aircraft-image {
+        aspect-ratio: 2 / 1;
+    }
+
+    .aircraft-card:last-child .aircraft-info {
+        padding: 28px;
+    }
+
+    .solution-item {
+        grid-template-columns: 45px minmax(0, 1fr);
+        gap: 20px;
+    }
+
+    .solution-tag {
+        grid-column: 2;
+        justify-content: flex-start;
+        padding-top: 0;
+    }
+
+    .principles-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .principle-card {
+        min-height: 0;
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .contact-panel {
+        max-width: 620px;
+    }
+}
+
+
+/* =========================================================
+   15. MÓVILES
+========================================================= */
+
+@media (max-width: 560px) {
+    :root {
+        --page-gutter: 6%;
+    }
+
+    .section-padding {
+        padding-block: 76px;
+    }
+
+    .navbar {
+        min-height: 72px;
+    }
+
+    .logo-symbol {
+        width: 38px;
+        height: 38px;
+        font-size: 1.3rem;
+    }
+
+    .logo-text strong {
+        font-size: 1.1rem;
+    }
+
+    .logo-text small {
+        font-size: 0.51rem;
+    }
+
+    .hero {
+        min-height: 700px;
+        min-height: min(760px, calc(100svh - 72px));
+    }
+
+    .hero-image img {
+        object-position: 57% center;
+    }
+
+    .hero-overlay {
+        background:
+            linear-gradient(
+                90deg,
+                rgba(4, 14, 26, 0.87),
+                rgba(4, 14, 26, 0.48)
+            ),
+            linear-gradient(
+                0deg,
+                rgba(4, 14, 26, 0.8),
+                transparent 90%
+            );
+    }
+
+    .hero-content {
+        padding-top: 50px;
+        padding-bottom: 110px;
+    }
+
+    .hero-content .eyebrow {
+        margin-bottom: 22px;
+        font-size: 0.65rem;
+    }
+
+    .hero h1 {
+        font-size: clamp(3rem, 12vw, 4.2rem);
+        letter-spacing: -0.06em;
+    }
+
+    .hero-description {
+        margin-top: 24px;
+        font-size: 0.92rem;
+        line-height: 1.8;
+    }
+
+    .hero-actions {
+        align-items: stretch;
+        flex-direction: column;
+        margin-top: 28px;
+    }
+
+    .hero-actions .button {
+        width: 100%;
+        text-align: center;
+    }
+
+    .hero-caption {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 6px;
+
+        padding-top: 15px;
+        font-size: 0.6rem;
+    }
+
+    .intro-heading h2 {
+        font-size: clamp(2.15rem, 9vw, 3rem);
+    }
+
+    .intro-copy p {
+        font-size: 0.9rem;
+    }
+
+    .section-heading {
+        margin-bottom: 35px;
+    }
+
+    .section-heading h2 {
+        font-size: clamp(2rem, 8.5vw, 2.8rem);
+    }
+
+    .aircraft-grid {
+        grid-template-columns: 1fr;
+        gap: 22px;
+    }
+
+    .aircraft-card:last-child {
+        grid-column: auto;
+    }
+
+    .aircraft-card:last-child .aircraft-image {
+        aspect-ratio: 1.35 / 1;
+    }
+
+    .aircraft-info {
+        padding: 27px 24px 30px;
+    }
+
+    .aircraft-info h3 {
+        font-size: 1.7rem;
+    }
+
+    .aircraft-info > p:not(.eyebrow):not(.aircraft-category) {
+        margin-bottom: 22px;
+    }
+
+    .solution-item {
+        grid-template-columns: 30px minmax(0, 1fr);
+        gap: 13px;
+
+        padding-block: 30px;
+    }
+
+    .solution-item:hover {
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .solution-content h3 {
+        font-size: 1.55rem;
+    }
+
+    .solution-content p {
+        font-size: 0.85rem;
+    }
+
+    .solution-tag span {
+        font-size: 0.58rem;
+    }
+
+    .engineering-section {
+        min-height: 570px;
+    }
+
+    .engineering-image img {
+        object-position: 60% center;
+    }
+
+    .engineering-overlay {
+        background: rgba(7, 21, 37, 0.82);
+    }
+
+    .engineering-content {
+        padding-block: 80px;
+    }
+
+    .engineering-content h2 {
+        font-size: clamp(2.3rem, 9vw, 3.3rem);
+    }
+
+    .engineering-content > p:not(.eyebrow) {
+        font-size: 0.9rem;
+    }
+
+    .principle-card {
+        padding: 27px 24px;
+    }
+
+    .contact-heading h2 {
+        font-size: clamp(2.3rem, 9vw, 3.2rem);
+    }
+
+    .contact-panel {
+        padding: 27px 22px;
+    }
+
+    .contact-panel h3 {
+        font-size: 1.7rem;
+    }
+
+    .contact-panel .button {
+        width: 100%;
+        padding-inline: 12px;
+        font-size: 0.76rem;
+    }
+
+    .footer-main {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 22px;
+
+        padding-block: 35px;
+    }
+
+    .footer-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 18px;
+
+        padding-block: 22px;
+    }
+
+    .footer-links {
+        gap: 17px;
+    }
+}
+
+
+/* =========================================================
+   16. PANTALLAS MUY PEQUEÑAS
+========================================================= */
+
+@media (max-width: 360px) {
+    .hero h1 {
+        font-size: 2.7rem;
+    }
+
+    .logo {
+        gap: 8px;
+    }
+
+    .logo-symbol {
+        width: 34px;
+        height: 34px;
+    }
+
+    .logo-text strong {
+        font-size: 1rem;
+    }
+
+    .hero-caption {
+        font-size: 0.55rem;
+    }
+
+    .button {
+        padding-inline: 16px;
+        font-size: 0.77rem;
+    }
+}
+
+
+/* =========================================================
+   17. ACCESIBILIDAD Y MOVIMIENTO REDUCIDO
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
